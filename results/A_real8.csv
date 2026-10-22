@@ -1,0 +1,7 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+4dgs,387,real8,test_interp,23.8433,0.9552,0.0424,14.7540,0.7937,0.1697,0.0452,20,76193,"dnerf_default hparams (multires default [1,2,4,8]), PanopticSports format"
+4dgs,387,real8,test_extrap,22.2860,0.9442,0.0505,13.4900,0.7815,0.1770,0.0448,20,76193,"dnerf_default hparams (multires default [1,2,4,8]), PanopticSports format"
+ftgspp_black,387,real8,test_interp,18.3821,0.8884,0.2357,15.9226,0.5962,0.4090,0.0469,13,499996,"masked black bg official training, init fix"
+ftgspp_black,387,real8,test_extrap,18.1311,0.8879,0.2457,14.8652,0.6090,0.4365,0.0497,13,499996,"masked black bg official training, init fix"
+sr4d,387,real8,test_interp,24.8188,0.9567,0.0407,15.6613,0.8007,0.1605,0.0529,155.0,399999,"SR4D full, real8"
+sr4d,387,real8,test_extrap,23.6089,0.9414,0.0537,14.7336,0.7711,0.1866,0.0561,155.0,399999,"SR4D full, real8"

@@ -1,0 +1,3 @@
+# no SMPL-X scaffold: no body surfels, free Gaussians driven by free bones only (bones parented to nothing)
+model: {no_scaffold: true, body_surfels: {n_init: 0}, free: {d_free_m: -1.0, n_bones: 64}}
+train: {stages: {s1: 0}}

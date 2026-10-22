@@ -1,0 +1,8 @@
+# B-stage: 4DAnyone generated views (gen24/gen48), evaluated on real held-out cams
+data:
+  dataset: dna_rendering_gen
+  setting: gen24
+model:
+  l4: {enabled: true, camera_refine: true, confidence: true}
+train:
+  loss: {conf: 0.01, source_view_mult: 3.0}

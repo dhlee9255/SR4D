@@ -1,0 +1,18 @@
+# Storage paths are NOT yet confirmed by the user (CLAUDE.md rule 3). See docs/ENV_REPORT.md §2.
+root: /data/AI-Graphics/Applications/SR4D
+repos:
+  fouranyone: /data/AI-Graphics/Applications/4Danyone
+  ftgspp: /data/AI-Graphics/Applications/4Danyone/4dgs_recon/FreeTimeGSPlusPlus
+  dualgs: /data/AI-Graphics/Applications/DualGS
+  fourdgs: /data/AI-Graphics/Applications/SR4D/third_party/4DGaussians
+storage:
+  raw_data: null        # TODO(user): NAS path for DNA-Rendering .smc
+  work_data: /data/AI-Graphics/Applications/SR4D/data_dev   # TEMPORARY (small dev data on local NVMe, ~17G free)
+  outputs: /data/AI-Graphics/Applications/SR4D/outputs      # TEMPORARY
+assets:
+  smplx_models: /data/AI-Graphics/Applications/SR4D/assets/body_models   # extracted from 4Danyone/models_smplx_v1_1.zip
+envs:
+  sr4d: sr4d
+  ftgspp_python: /data/AI-Graphics/Applications/4Danyone/4dgs_recon/FreeTimeGSPlusPlus/.venv/bin/python
+  dualgs: dualgs
+  fourdgs: hust4dgs

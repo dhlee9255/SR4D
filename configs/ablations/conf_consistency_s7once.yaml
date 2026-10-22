@@ -1,0 +1,3 @@
+# D-036 for the s7 experiment: consistency confidence computed ONCE at the start of s7 from the base model's depth.
+model: {l4: {conf_mode: consistency}}
+train: {cons_start: 1000000000, cons_every: 1000000000, cons_floor: 0.1}

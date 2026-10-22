@@ -1,0 +1,10 @@
+# B-stage dev: 4DAnyone gen24 of Pexels dance 5885633 (loose clothing, hair). Generated-only: trained AND evaluated on the generated
+# views (no real cameras anywhere, D-024). L4: camera refinement on, colour affine off (user, D-024).
+data:
+  dataset: fouranyone_gen
+  root: data_dev/fouranyone_gen/dance5885633_gen24
+  seq: "dance5885633"
+  setting: gen24
+  frames: [0, 60]
+model:
+  l4: {enabled: true, color: false, camera_refine: true, confidence: true}

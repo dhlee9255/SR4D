@@ -1,0 +1,13 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+ftgspp_transparent,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,3,500000,FTGS++ official pipeline + random bg + alpha mask loss 0.05 (D-043)
+ftgspp_transparent,dance5885633_gen48_2ring,r15h35,test_extrap,14.0070,0.7788,0.2984,7.8538,0.5812,0.4489,0.0619,3,500000,FTGS++ official pipeline + random bg + alpha mask loss 0.05 (D-043)
+ftgspp_transparent,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,14,500000,FTGS++ official pipeline + random bg + alpha mask loss 0.05 (D-043)
+ftgspp_transparent,dance5885633_gen48_2ring,r15h35,test_extrap,19.1131,0.8534,0.1594,14.8523,0.7205,0.2754,0.0362,14,500000,FTGS++ official pipeline + random bg + alpha mask loss 0.05 (D-043)
+sr4d_final_nol4,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,144.3,399999,"dance_r15h35_nol4 (r15h35), V0 + pose (a) + L2 + L3, L4 off"
+sr4d_final_nol4,dance5885633_gen48_2ring,r15h35,test_extrap,17.9516,0.8013,0.2023,16.0369,0.6454,0.3227,0.0382,144.3,399999,"dance_r15h35_nol4 (r15h35), V0 + pose (a) + L2 + L3, L4 off"
+sr4d_final_nol4,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,148.8,399999,"zju_r15h35_nol4 (r15h35), V0 + pose (a) + L2 + L3, L4 off"
+sr4d_final_nol4,387_gen48_2ring,r15h35,test_extrap,23.7119,0.9269,0.0705,18.6830,0.8430,0.1391,0.0376,148.8,399999,"zju_r15h35_nol4 (r15h35), V0 + pose (a) + L2 + L3, L4 off"
+sr4d_final_nol4,dance5885633_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,142.7,399999,"dance_r15h35_s123_nol4 (r15h35), V0 + pose (a) + L2 + L3, L4 off"
+sr4d_final_nol4,dance5885633_gen48_2ring_s123,r15h35,test_extrap,18.3985,0.8030,0.2013,16.0467,0.6498,0.3207,0.0382,142.7,399999,"dance_r15h35_s123_nol4 (r15h35), V0 + pose (a) + L2 + L3, L4 off"
+sr4d_final_nol4,387_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,141.9,399999,"zju_r15h35_s123_nol4 (r15h35), V0 + pose (a) + L2 + L3, L4 off"
+sr4d_final_nol4,387_gen48_2ring_s123,r15h35,test_extrap,23.4643,0.9263,0.0702,18.2718,0.8414,0.1386,0.0379,141.9,399999,"zju_r15h35_s123_nol4 (r15h35), V0 + pose (a) + L2 + L3, L4 off"

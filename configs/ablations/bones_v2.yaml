@@ -1,0 +1,3 @@
+# D-023 free-bone variant v2
+model:
+  free: {bone_mode: spline}

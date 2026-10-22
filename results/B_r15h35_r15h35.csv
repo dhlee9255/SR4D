@@ -1,0 +1,91 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+4dgs,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,21,141429,zju r15h35 held-out 35deg
+4dgs,387_gen48_2ring,r15h35,test_extrap,22.2031,0.9183,0.0875,17.4254,0.8249,0.1728,0.0377,21,141429,zju r15h35 held-out 35deg
+ftgspp_black_official,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,13,499996,"zju r15h35 held-out 35deg, legacy"
+ftgspp_black_official,387_gen48_2ring,r15h35,test_extrap,19.4289,0.8719,0.2387,19.1460,0.7492,0.3073,0.0391,13,499996,"zju r15h35 held-out 35deg, legacy"
+sr4d_v0,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,151.9,399999,zju r15h35 held-out 35deg
+sr4d_v0,387_gen48_2ring,r15h35,test_extrap,22.5483,0.9178,0.0716,17.7339,0.8242,0.1414,0.0388,151.9,399999,zju r15h35 held-out 35deg
+4dgs,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,24,132690,dance r15h35 held-out 35deg
+4dgs,dance5885633_gen48_2ring,r15h35,test_extrap,18.0937,0.8527,0.2129,13.8720,0.7143,0.3478,0.0362,24,132690,dance r15h35 held-out 35deg
+ftgspp_black_official,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,15,499996,"dance r15h35 held-out 35deg, legacy"
+ftgspp_black_official,dance5885633_gen48_2ring,r15h35,test_extrap,15.0907,0.7773,0.3103,14.2816,0.6435,0.3633,0.0387,15,499996,"dance r15h35 held-out 35deg, legacy"
+sr4d_v0,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,157.7,399999,dance r15h35 held-out 35deg
+sr4d_v0,dance5885633_gen48_2ring,r15h35,test_extrap,18.0952,0.8029,0.2090,15.9452,0.6449,0.3375,0.0389,157.7,399999,dance r15h35 held-out 35deg
+sr4d_v0_posea,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,219.6,399999,"zju r15h35 held-out 35deg, D-025 pose (a)"
+sr4d_v0_posea,387_gen48_2ring,r15h35,test_extrap,22.5972,0.9188,0.0705,17.8137,0.8263,0.1393,0.0386,219.6,399999,"zju r15h35 held-out 35deg, D-025 pose (a)"
+sr4d_v0_poseb,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,178.1,399999,"dance r15h35 held-out 35deg, D-025 pose (b)"
+sr4d_v0_poseb,dance5885633_gen48_2ring,r15h35,test_extrap,17.7072,0.7985,0.2122,15.6714,0.6406,0.3401,0.0388,178.1,399999,"dance r15h35 held-out 35deg, D-025 pose (b)"
+sr4d_v0_posea,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,148.3,399999,"dance r15h35 held-out 35deg, D-025 pose (a)"
+sr4d_v0_posea,dance5885633_gen48_2ring,r15h35,test_extrap,17.2383,0.7954,0.2144,16.1380,0.6394,0.3420,0.0383,148.3,399999,"dance r15h35 held-out 35deg, D-025 pose (a)"
+sr4d_v0_poseb,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,306.4,399999,"zju r15h35 held-out 35deg, D-025 pose (b)"
+sr4d_v0_poseb,387_gen48_2ring,r15h35,test_extrap,22.5906,0.9185,0.0712,17.8093,0.8256,0.1410,0.0387,306.4,399999,"zju r15h35 held-out 35deg, D-025 pose (b)"
+dualgs,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,434,108961,zju gen r15h35 held-out 35deg
+dualgs,387_gen48_2ring,r15h35,test_extrap,23.4583,0.9196,0.0891,18.5091,0.8250,0.1688,0.0455,434,108961,zju gen r15h35 held-out 35deg
+dualgs,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,455,128453,dance r15h35 held-out 35deg
+dualgs,dance5885633_gen48_2ring,r15h35,test_extrap,17.5587,0.8351,0.1711,11.8743,0.6871,0.2962,0.0511,455,128453,dance r15h35 held-out 35deg
+sr4d_v0_posea,387_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,146.1,399999,"zju r15h35_s123 held-out 35deg, D-025 pose (a)"
+sr4d_v0_posea,387_gen48_2ring_s123,r15h35,test_extrap,22.4091,0.9174,0.0717,17.2435,0.8235,0.1418,0.0389,146.1,399999,"zju r15h35_s123 held-out 35deg, D-025 pose (a)"
+sr4d_v0_posea,dance5885633_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,147.7,399999,"dance r15h35_s123 held-out 35deg, D-025 pose (a)"
+sr4d_v0_posea,dance5885633_gen48_2ring_s123,r15h35,test_extrap,17.2063,0.7947,0.2151,15.8639,0.6395,0.3424,0.0390,147.7,399999,"dance r15h35_s123 held-out 35deg, D-025 pose (a)"
+4dgs,dance5885633_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,22,127275,dance r15h35_s123 held-out 35deg
+4dgs,dance5885633_gen48_2ring_s123,r15h35,test_extrap,18.3610,0.8539,0.2097,13.8779,0.7167,0.3446,0.0362,22,127275,dance r15h35_s123 held-out 35deg
+4dgs,387_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,30,142487,zju r15h35_s123 held-out 35deg
+4dgs,387_gen48_2ring_s123,r15h35,test_extrap,21.9509,0.9174,0.0868,16.7103,0.8229,0.1722,0.0377,30,142487,zju r15h35_s123 held-out 35deg
+ftgspp_black_official,dance5885633_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,15,499996,"dance r15h35_s123 held-out 35deg, legacy"
+ftgspp_black_official,dance5885633_gen48_2ring_s123,r15h35,test_extrap,17.4485,0.8239,0.2559,14.3765,0.6816,0.3269,0.0384,15,499996,"dance r15h35_s123 held-out 35deg, legacy"
+ftgspp_black_official,387_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,15,499996,"zju r15h35_s123 held-out 35deg, legacy"
+ftgspp_black_official,387_gen48_2ring_s123,r15h35,test_extrap,19.5774,0.8768,0.2367,19.0110,0.7562,0.3042,0.0384,15,499996,"zju r15h35_s123 held-out 35deg, legacy"
+sr4d_v0_posea_nol3,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,96.6,399999,"dance r15h35 held-out 35deg, pose (a), no L3 from scratch"
+sr4d_v0_posea_nol3,dance5885633_gen48_2ring,r15h35,test_extrap,16.8709,0.7917,0.2182,15.9446,0.6377,0.3470,0.0384,96.6,399999,"dance r15h35 held-out 35deg, pose (a), no L3 from scratch"
+4dgs,dance5885633_gen48_2ring_s7,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,24,130248,dance r15h35_s7 held-out 35deg
+4dgs,dance5885633_gen48_2ring_s7,r15h35,test_extrap,17.9941,0.8426,0.2213,14.0744,0.7009,0.3580,0.0357,24,130248,dance r15h35_s7 held-out 35deg
+sr4d_v0_posea_nol3,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,114.5,399999,"zju r15h35 held-out 35deg, pose (a), no L3 from scratch"
+sr4d_v0_posea_nol3,387_gen48_2ring,r15h35,test_extrap,22.5539,0.9181,0.0728,17.8729,0.8248,0.1440,0.0391,114.5,399999,"zju r15h35 held-out 35deg, pose (a), no L3 from scratch"
+4dgs,387_gen48_2ring_s7,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,28,139220,zju r15h35_s7 held-out 35deg
+4dgs,387_gen48_2ring_s7,r15h35,test_extrap,21.8785,0.9173,0.0890,16.7299,0.8226,0.1758,0.0372,28,139220,zju r15h35_s7 held-out 35deg
+ftgspp_black_official,dance5885633_gen48_2ring_s7,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,17,499996,"dance r15h35_s7 held-out 35deg, legacy"
+ftgspp_black_official,dance5885633_gen48_2ring_s7,r15h35,test_extrap,17.1514,0.8142,0.2740,14.1528,0.6591,0.3562,0.0384,17,499996,"dance r15h35_s7 held-out 35deg, legacy"
+ftgspp_black_official,387_gen48_2ring_s7,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,15,499996,"zju r15h35_s7 held-out 35deg, legacy"
+ftgspp_black_official,387_gen48_2ring_s7,r15h35,test_extrap,19.5666,0.8714,0.2415,19.2020,0.7428,0.3097,0.0384,15,499996,"zju r15h35_s7 held-out 35deg, legacy"
+sr4d_v0_posea_nol2dx,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,150.5,399999,"dance r15h35 held-out 35deg, pose (a), L2 without dx from scratch"
+sr4d_v0_posea_nol2dx,dance5885633_gen48_2ring,r15h35,test_extrap,17.2733,0.7985,0.2225,15.8606,0.6424,0.3571,0.0380,150.5,399999,"dance r15h35 held-out 35deg, pose (a), L2 without dx from scratch"
+sr4d_v0_posea_nol2dx,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,151.1,399999,"zju r15h35 held-out 35deg, pose (a), L2 without dx from scratch"
+sr4d_v0_posea_nol2dx,387_gen48_2ring,r15h35,test_extrap,22.4366,0.9141,0.0804,17.7292,0.8162,0.1593,0.0383,151.1,399999,"zju r15h35 held-out 35deg, pose (a), L2 without dx from scratch"
+sr4d_v0_posea,387_gen48_2ring_s7,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,157.2,399999,"zju r15h35_s7 held-out 35deg, D-025 pose (a)"
+sr4d_v0_posea,387_gen48_2ring_s7,r15h35,test_extrap,22.4505,0.9181,0.0718,17.4423,0.8247,0.1420,0.0378,157.2,399999,"zju r15h35_s7 held-out 35deg, D-025 pose (a)"
+sr4d_v0_posea,dance5885633_gen48_2ring_s7,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,232.9,399999,"dance r15h35_s7 held-out 35deg, D-025 pose (a)"
+sr4d_v0_posea,dance5885633_gen48_2ring_s7,r15h35,test_extrap,17.3058,0.7898,0.2196,16.0441,0.6316,0.3490,0.0382,232.9,399999,"dance r15h35_s7 held-out 35deg, D-025 pose (a)"
+sr4d_v0_posea_nol3,387_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,96.6,399999,"zju r15h35_s123 held-out 35deg, pose (a), no L3 from scratch"
+sr4d_v0_posea_nol3,387_gen48_2ring_s123,r15h35,test_extrap,22.3920,0.9169,0.0746,17.2733,0.8222,0.1474,0.0391,96.6,399999,"zju r15h35_s123 held-out 35deg, pose (a), no L3 from scratch"
+dualgs,dance5885633_gen48_2ring_s7,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,503,130101,"iters=30000 subseq=15000, init=visual hull+SMPL verts"
+dualgs,dance5885633_gen48_2ring_s7,r15h35,test_extrap,17.7984,0.8295,0.1756,12.1280,0.6766,0.3014,0.0532,503,130101,"iters=30000 subseq=15000, init=visual hull+SMPL verts"
+dualgs,dance5885633_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,398,131734,"iters=30000 subseq=15000, init=visual hull+SMPL verts"
+dualgs,dance5885633_gen48_2ring_s123,r15h35,test_extrap,17.3540,0.8338,0.1683,11.5445,0.6860,0.2926,0.0524,398,131734,"iters=30000 subseq=15000, init=visual hull+SMPL verts"
+dualgs,387_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,386,104983,"iters=30000 subseq=15000, init=visual hull+SMPL verts"
+dualgs,387_gen48_2ring_s123,r15h35,test_extrap,21.5805,0.9154,0.1059,15.1278,0.8149,0.1843,0.0487,386,104983,"iters=30000 subseq=15000, init=visual hull+SMPL verts"
+sr4d_v0_posea_nol3,dance5885633_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,131.1,399999,"dance r15h35_s123 held-out 35deg, pose (a), no L3 from scratch"
+sr4d_v0_posea_nol3,dance5885633_gen48_2ring_s123,r15h35,test_extrap,16.8638,0.7929,0.2185,15.6830,0.6396,0.3479,0.0386,131.1,399999,"dance r15h35_s123 held-out 35deg, pose (a), no L3 from scratch"
+sr4d_v0_posea_nol2dx,387_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,153.2,399999,"zju r15h35_s123 held-out 35deg, pose (a), L2 without dx from scratch"
+sr4d_v0_posea_nol2dx,387_gen48_2ring_s123,r15h35,test_extrap,22.2746,0.9132,0.0811,17.2400,0.8145,0.1609,0.0389,153.2,399999,"zju r15h35_s123 held-out 35deg, pose (a), L2 without dx from scratch"
+sr4d_v0_posea_nol2dx,dance5885633_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,153.2,399999,"dance r15h35_s123 held-out 35deg, pose (a), L2 without dx from scratch"
+sr4d_v0_posea_nol2dx,dance5885633_gen48_2ring_s123,r15h35,test_extrap,17.1474,0.7996,0.2202,15.2557,0.6450,0.3526,0.0387,153.2,399999,"dance r15h35_s123 held-out 35deg, pose (a), L2 without dx from scratch"
+4dgs_unseen,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,41,122652,"dance r15h35 held-out 35deg, prune unseen (D-029 appendix)"
+4dgs_unseen,dance5885633_gen48_2ring,r15h35,test_extrap,18.1840,0.8530,0.1848,13.7651,0.7203,0.3177,0.0363,41,122652,"dance r15h35 held-out 35deg, prune unseen (D-029 appendix)"
+4dgs_unseen,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,42,141408,"zju r15h35 held-out 35deg, prune unseen (D-029 appendix)"
+4dgs_unseen,387_gen48_2ring,r15h35,test_extrap,22.7223,0.9198,0.0864,18.7352,0.8278,0.1709,0.0371,42,141408,"zju r15h35 held-out 35deg, prune unseen (D-029 appendix)"
+sr4d_v0_posea_unseen,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,216.3,399999,"zju r15h35 held-out 35deg, pose (a), prune unseen free Gaussians (D-029)"
+sr4d_v0_posea_unseen,387_gen48_2ring,r15h35,test_extrap,22.6098,0.9186,0.0706,17.8299,0.8259,0.1395,0.0386,216.3,399999,"zju r15h35 held-out 35deg, pose (a), prune unseen free Gaussians (D-029)"
+sr4d_v0_posea_unseen,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,220.9,399999,"dance r15h35 held-out 35deg, pose (a), prune unseen free Gaussians (D-029)"
+sr4d_v0_posea_unseen,dance5885633_gen48_2ring,r15h35,test_extrap,18.3581,0.8180,0.1986,15.7440,0.6711,0.3222,0.0383,220.9,399999,"dance r15h35 held-out 35deg, pose (a), prune unseen free Gaussians (D-029)"
+ftgspp_black_official_unseen,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,20,499996,"zju r15h35 held-out 35deg, legacy, prune unseen (D-029 appendix)"
+ftgspp_black_official_unseen,387_gen48_2ring,r15h35,test_extrap,19.2007,0.8620,0.2492,19.2118,0.7350,0.3193,0.0391,20,499996,"zju r15h35 held-out 35deg, legacy, prune unseen (D-029 appendix)"
+ftgspp_black_official_unseen,dance5885633_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,19,499996,"dance r15h35 held-out 35deg, legacy, prune unseen (D-029 appendix)"
+ftgspp_black_official_unseen,dance5885633_gen48_2ring,r15h35,test_extrap,14.3281,0.7595,0.3241,14.3317,0.6169,0.3809,0.0384,19,499996,"dance r15h35 held-out 35deg, legacy, prune unseen (D-029 appendix)"
+dualgs,387_gen48_2ring_s7,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,1609,105426,"zju r15h35_s7 held-out 35deg, CUDA_LAUNCH_BLOCKING=1 (async run failed twice at frame 1 skin backward)"
+dualgs,387_gen48_2ring_s7,r15h35,test_extrap,21.1462,0.9147,0.1031,14.5581,0.8147,0.1841,0.0482,1609,105426,"zju r15h35_s7 held-out 35deg, CUDA_LAUNCH_BLOCKING=1 (async run failed twice at frame 1 skin backward)"
+ftgspp_transparent,387_gen48_2ring,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,16,500000,FTGS++ official pipeline + random bg + alpha mask loss 0.05 (D-043)
+ftgspp_transparent,387_gen48_2ring,r15h35,test_extrap,23.3443,0.9267,0.0708,19.2887,0.8422,0.1397,0.0375,16,500000,FTGS++ official pipeline + random bg + alpha mask loss 0.05 (D-043)
+ftgspp_transparent,dance5885633_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,16,500000,FTGS++ official pipeline + random bg + alpha mask loss 0.05 (D-043)
+ftgspp_transparent,dance5885633_gen48_2ring_s123,r15h35,test_extrap,19.4715,0.8512,0.1610,15.2958,0.7187,0.2757,0.0366,16,500000,FTGS++ official pipeline + random bg + alpha mask loss 0.05 (D-043)
+ftgspp_transparent,387_gen48_2ring_s123,r15h35,test_interp,nan,nan,nan,nan,nan,nan,nan,16,500000,FTGS++ official pipeline + random bg + alpha mask loss 0.05 (D-043)
+ftgspp_transparent,387_gen48_2ring_s123,r15h35,test_extrap,23.3604,0.9271,0.0702,19.1649,0.8430,0.1389,0.0370,16,500000,FTGS++ official pipeline + random bg + alpha mask loss 0.05 (D-043)

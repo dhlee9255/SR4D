@@ -1,0 +1,6 @@
+# D-033 (user 2026-10-13): pose (a) for the body (input poses fixed, global translation offset) + temporal cubic B-spline
+# correction (control point every 4 frames) on the neck and head joints only. Bones V0.
+model:
+  free: {n_bones: 0}
+  scaffold_pose: global_headspline
+  scaffold_spline_step: 4

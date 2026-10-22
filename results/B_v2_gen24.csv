@@ -1,0 +1,9 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+sr4d,387,gen24,test_interp,20.3648,0.9353,0.0571,10.7602,0.7004,0.2244,0.0523,,,eval cams: v2 registration
+sr4d,387,gen24,test_extrap,20.5160,0.9354,0.0579,12.1673,0.7477,0.1994,0.0489,,,eval cams: v2 registration
+ftgspp,387,gen24,test_interp,20.2432,0.9319,0.0537,10.7355,0.6845,0.2128,0.0534,,,eval cams: v2 registration
+ftgspp,387,gen24,test_extrap,18.5008,0.9272,0.0648,9.1128,0.7175,0.2233,0.0497,,,eval cams: v2 registration
+4dgs,387,gen24,test_interp,20.3565,0.9346,0.0567,10.8734,0.6974,0.2230,0.0507,,,eval cams: v2 registration
+4dgs,387,gen24,test_extrap,20.4457,0.9354,0.0567,12.3836,0.7480,0.1955,0.0475,,,eval cams: v2 registration
+ftgspp_black_official,387,gen24,test_interp,19.5172,0.9128,0.1375,11.5077,0.6242,0.3446,0.0533,15,499996,"legacy 4DAnyone setting: masked black bg, official init (no cheirality fix), eval cams v2"
+ftgspp_black_official,387,gen24,test_extrap,19.2730,0.9093,0.1337,13.0740,0.6435,0.3551,0.0500,15,499996,"legacy 4DAnyone setting: masked black bg, official init (no cheirality fix), eval cams v2"

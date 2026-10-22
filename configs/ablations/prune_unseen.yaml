@@ -1,0 +1,3 @@
+# D-029 (user 2026-10-12): at every densification (relocation) step, free Gaussians whose deformed centre is outside the
+# image of every training camera in every frame are marked dead and relocated (MCMC keeps the count). Body surfels exempt.
+train: {prune_unseen: true}

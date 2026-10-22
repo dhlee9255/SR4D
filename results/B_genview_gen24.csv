@@ -1,0 +1,11 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+sr4d,387,gen24,test_interp,22.4677,0.9184,0.0833,18.9742,0.8818,0.1131,0.0323,,,"GT = generated views (train views, self-eval)"
+sr4d,387,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,,,"GT = generated views (train views, self-eval)"
+ftgspp_black_official,387,gen24,test_interp,19.0774,0.8904,0.2506,22.5286,0.8393,0.2636,0.0248,,,"GT = generated views (train views, self-eval)"
+ftgspp_black_official,387,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,,,"GT = generated views (train views, self-eval)"
+4dgs,387,gen24,test_interp,24.8797,0.9370,0.1051,21.8489,0.9083,0.1434,0.0278,,,"GT = generated views (train views, self-eval)"
+4dgs,387,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,,,"GT = generated views (train views, self-eval)"
+sr4d_l4view,387,gen24,test_interp,22.4731,0.9185,0.0833,18.9803,0.8820,0.1131,0.0323,,,GT = generated views; L4 kept at render (view)
+sr4d_l4view,387,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,,,GT = generated views; L4 kept at render (view)
+sr4d_l4view_cam,387,gen24,test_interp,26.5802,0.9536,0.0737,23.2198,0.9327,0.0997,0.0277,,,GT = generated views; L4 kept at render (view_cam)
+sr4d_l4view_cam,387,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,,,GT = generated views; L4 kept at render (view_cam)

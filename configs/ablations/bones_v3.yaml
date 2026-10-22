@@ -1,0 +1,5 @@
+# D-023 free-bone variant v3
+model:
+  free: {bone_mode: mlp_spline}
+train:
+  loss: {bone_res_reg: 1.0}

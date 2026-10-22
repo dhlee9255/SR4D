@@ -1,0 +1,29 @@
+{
+ "outputs/layered/exp005_dance_r15h35_n3/outer_final.pt": {
+  "n": 499996,
+  "floater": 4692,
+  "white": 3834,
+  "black": 740,
+  "outside_vh_op>=0.1": 5098,
+  "ratio>=10_frac": 0.8020904064178467,
+  "ratio_median": 83.74211883544922
+ },
+ "outputs/layered/exp007_dance_r15h35_n3_s1/outer_final.pt": {
+  "n": 499996,
+  "floater": 6306,
+  "white": 5633,
+  "black": 566,
+  "outside_vh_op>=0.1": 6827,
+  "ratio>=10_frac": 0.8069984316825867,
+  "ratio_median": 90.42372131347656
+ },
+ "outputs/layered/exp007_dance_r15h35_drop_s1/outer_final.pt": {
+  "n": 499996,
+  "floater": 2511,
+  "white": 1832,
+  "black": 613,
+  "outside_vh_op>=0.1": 2743,
+  "ratio>=10_frac": 0.7886262536048889,
+  "ratio_median": 74.27082824707031
+ }
+}

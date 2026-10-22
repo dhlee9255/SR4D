@@ -1,0 +1,2 @@
+# Ablation (user 2026-10-12): L2 without the position offset dx (keeps rotation, scale, colour residuals).
+model: {l2: {no_dx: true}}

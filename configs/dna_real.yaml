@@ -1,0 +1,10 @@
+# A-stage: DNA-Rendering real multi-view
+data:
+  dataset: dna_rendering
+  seq: "0012_09"
+  setting: real24
+  frames: [0, 60]
+  downscale: 2
+  background: white
+model:
+  l4: {enabled: true, camera_refine: false, confidence: false}

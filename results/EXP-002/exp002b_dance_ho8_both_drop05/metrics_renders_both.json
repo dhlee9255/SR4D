@@ -1,0 +1,63 @@
+{
+ "test_interp": {
+  "psnr": 22.9804083943367,
+  "ssim": 0.8776959570745627,
+  "lpips": 0.11928883649719259,
+  "fg_psnr": 20.881785980860393,
+  "fg_ssim": 0.7910880780468384,
+  "fg_lpips": 0.18729020201911528,
+  "temporal": 0.03287186395077003,
+  "fgi_psnr": 24.254339202245077,
+  "band_psnr": 12.000551444292068,
+  "tof": 2.1453677302057095,
+  "oom_alpha": 0.003705578242200621,
+  "per_cam": {
+   "g00": {
+    "psnr": 22.075248018900552,
+    "nearest_angle": 14.66
+   },
+   "g06": {
+    "psnr": 21.641859181722005,
+    "nearest_angle": 14.66
+   },
+   "g12": {
+    "psnr": 22.877939828236897,
+    "nearest_angle": 14.66
+   },
+   "g18": {
+    "psnr": 23.33061326344808,
+    "nearest_angle": 14.66
+   },
+   "g27": {
+    "psnr": 24.19389508565267,
+    "nearest_angle": 14.66
+   },
+   "g33": {
+    "psnr": 22.60704984664917,
+    "nearest_angle": 14.66
+   },
+   "g39": {
+    "psnr": 23.152804470062257,
+    "nearest_angle": 14.66
+   },
+   "g45": {
+    "psnr": 23.963857460021973,
+    "nearest_angle": 14.66
+   }
+  }
+ },
+ "test_extrap": {
+  "psnr": NaN,
+  "ssim": NaN,
+  "lpips": NaN,
+  "fg_psnr": NaN,
+  "fg_ssim": NaN,
+  "fg_lpips": NaN,
+  "temporal": NaN,
+  "fgi_psnr": NaN,
+  "band_psnr": NaN,
+  "tof": NaN,
+  "oom_alpha": NaN,
+  "per_cam": {}
+ }
+}

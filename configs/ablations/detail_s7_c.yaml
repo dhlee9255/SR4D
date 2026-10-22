@@ -1,0 +1,3 @@
+# D-039 (c): detail layer (dx + dc) with 10x neighbour-frame smoothness (LPIPS 0.05 from base, as in (a)).
+train:
+  loss: {detail_smooth: 0.1}

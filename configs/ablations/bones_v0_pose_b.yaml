@@ -1,0 +1,5 @@
+# D-025 (b): B-stage pose correction as a temporal cubic B-spline (control point every 4 frames). Bones V0.
+model:
+  free: {n_bones: 0}
+  scaffold_pose: spline
+  scaffold_spline_step: 4

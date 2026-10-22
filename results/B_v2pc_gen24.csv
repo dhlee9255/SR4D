@@ -1,0 +1,15 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+sr4d,387,gen24,test_interp,20.6754,0.9366,0.0562,10.9876,0.7059,0.2196,0.0516,,,eval cams: v2pc registration
+sr4d,387,gen24,test_extrap,21.1485,0.9384,0.0554,11.6153,0.7584,0.1910,0.0490,,,eval cams: v2pc registration
+sr4d,387,gen24,test_interp,20.6754,0.9366,0.0562,10.9876,0.7059,0.2196,0.0516,,,eval cams: v2pc registration
+sr4d,387,gen24,test_extrap,21.1485,0.9384,0.0554,11.6153,0.7584,0.1910,0.0490,,,eval cams: v2pc registration
+4dgs,387,gen24,test_interp,20.8239,0.9368,0.0552,11.2396,0.7070,0.2165,0.0499,,,eval cams: v2pc registration
+4dgs,387,gen24,test_extrap,21.3258,0.9399,0.0525,12.0921,0.7645,0.1802,0.0475,,,eval cams: v2pc registration
+sr4d,387,gen24,test_interp,20.6754,0.9366,0.0562,10.9876,0.7059,0.2196,0.0516,,,eval cams: v2pc registration
+sr4d,387,gen24,test_extrap,21.1485,0.9384,0.0554,11.6153,0.7584,0.1910,0.0490,,,eval cams: v2pc registration
+ftgspp,387,gen24,test_interp,20.6519,0.9338,0.0524,11.0321,0.6926,0.2065,0.0526,,,eval cams: v2pc registration
+ftgspp,387,gen24,test_extrap,19.2226,0.9318,0.0605,9.2654,0.7339,0.2044,0.0507,,,eval cams: v2pc registration
+4dgs,387,gen24,test_interp,20.8239,0.9368,0.0552,11.2396,0.7070,0.2165,0.0499,,,eval cams: v2pc registration
+4dgs,387,gen24,test_extrap,21.3258,0.9399,0.0525,12.0921,0.7645,0.1802,0.0475,,,eval cams: v2pc registration
+ftgspp_black_official,387,gen24,test_interp,19.9500,0.9153,0.1370,11.9929,0.6373,0.3365,0.0524,,,"legacy setting, eval cams v2pc"
+ftgspp_black_official,387,gen24,test_extrap,20.2960,0.9169,0.1263,13.0450,0.6702,0.3380,0.0499,,,"legacy setting, eval cams v2pc"

@@ -1,0 +1,19 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+ftgspp_black_official,387_gen48_2ring,gen48_all,test_interp,20.3516,0.9139,0.2367,21.8959,0.8509,0.2475,0.0277,26,499996,"zju_gen48_all (gen48_all), legacy"
+ftgspp_black_official,387_gen48_2ring,gen48_all,test_extrap,nan,nan,nan,nan,nan,nan,nan,26,499996,"zju_gen48_all (gen48_all), legacy"
+ftgspp_black_official,dance5885633_gen48_2ring,gen48_all,test_interp,16.7238,0.8316,0.3001,22.4780,0.7685,0.3012,0.0319,26,499996,"dance_gen48_all (gen48_all), legacy"
+ftgspp_black_official,dance5885633_gen48_2ring,gen48_all,test_extrap,nan,nan,nan,nan,nan,nan,nan,26,499996,"dance_gen48_all (gen48_all), legacy"
+sr4d_final,387_gen48_2ring,gen48_all,test_interp,23.2205,0.9308,0.0661,18.9866,0.8797,0.1051,0.0317,180.2,399999,"zju_gen48_all (gen48_all), V0 + pose (a) + L2 + L3"
+sr4d_final,387_gen48_2ring,gen48_all,test_extrap,nan,nan,nan,nan,nan,nan,nan,180.2,399999,"zju_gen48_all (gen48_all), V0 + pose (a) + L2 + L3"
+sr4d_final,dance5885633_gen48_2ring,gen48_all,test_interp,22.8617,0.8791,0.1263,20.0649,0.7923,0.1963,0.0339,169.3,399999,"dance_gen48_all (gen48_all), V0 + pose (a) + L2 + L3"
+sr4d_final,dance5885633_gen48_2ring,gen48_all,test_extrap,nan,nan,nan,nan,nan,nan,nan,169.3,399999,"dance_gen48_all (gen48_all), V0 + pose (a) + L2 + L3"
+4dgs,dance5885633_gen48_2ring,gen48_all,test_interp,23.7117,0.8834,0.1729,20.6125,0.8013,0.2691,0.0333,27,136756,dance_gen48_all (gen48_all)
+4dgs,dance5885633_gen48_2ring,gen48_all,test_extrap,nan,nan,nan,nan,nan,nan,nan,27,136756,dance_gen48_all (gen48_all)
+4dgs,387_gen48_2ring,gen48_all,test_interp,25.0317,0.9388,0.0928,20.8405,0.8928,0.1488,0.0305,23,117394,zju_gen48_all (gen48_all)
+4dgs,387_gen48_2ring,gen48_all,test_extrap,nan,nan,nan,nan,nan,nan,nan,23,117394,zju_gen48_all (gen48_all)
+dualgs,dance5885633_gen48_2ring,gen48_all,test_interp,27.3391,0.9331,0.1099,24.1256,0.8866,0.1710,0.0268,466,115016,dance_gen48_all (gen48_all)
+dualgs,dance5885633_gen48_2ring,gen48_all,test_extrap,nan,nan,nan,nan,nan,nan,nan,466,115016,dance_gen48_all (gen48_all)
+dualgs,387_gen48_2ring,gen48_all,test_interp,29.3056,0.9737,0.0550,24.7150,0.9538,0.0874,0.0221,438,100495,zju_gen48_all (gen48_all)
+dualgs,387_gen48_2ring,gen48_all,test_extrap,nan,nan,nan,nan,nan,nan,nan,438,100495,zju_gen48_all (gen48_all)
+sr4d_final_headspline,dance5885633_gen48_2ring,gen48_all,test_interp,22.9161,0.8784,0.1262,20.0273,0.7910,0.1962,0.0338,252.1,399999,"dance_gen48_all (gen48_all), final config + headspline"
+sr4d_final_headspline,dance5885633_gen48_2ring,gen48_all,test_extrap,nan,nan,nan,nan,nan,nan,nan,252.1,399999,"dance_gen48_all (gen48_all), final config + headspline"

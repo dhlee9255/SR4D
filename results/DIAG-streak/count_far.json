@@ -1,0 +1,29 @@
+{
+ "outputs/layered/exp003b_dance_r15h35_both_drop05/outer_final.pt": {
+  "n": 499996,
+  "floater": 3168,
+  "white": 2102,
+  "black": 962,
+  "outside_vh_op>=0.1": 3375,
+  "ratio>=10_frac": 0.7848302721977234,
+  "ratio_median": 69.62379455566406
+ },
+ "outputs/layered/exp003_dance_r15h35_outer/outer_final.pt": {
+  "n": 499996,
+  "floater": 2918,
+  "white": 1747,
+  "black": 1066,
+  "outside_vh_op>=0.1": 3176,
+  "ratio>=10_frac": 0.7938563227653503,
+  "ratio_median": 67.58795166015625
+ },
+ "results/DIAG-streak/ftgspp_states/ftgspp_black_official_dance_r15h35.pt": {
+  "n": 499996,
+  "floater": 1433,
+  "white": 0,
+  "black": 879,
+  "outside_vh_op>=0.1": 1526,
+  "ratio>=10_frac": 0.8158764839172363,
+  "ratio_median": 49.5738410949707
+ }
+}

@@ -1,0 +1,2 @@
+# all layers trained together from the start of S2 (no staging); total iterations kept equal
+train: {joint: true}

@@ -1,0 +1,3 @@
+# confound check for no_l3: same total iterations as the full model (54k) with L3 off (S3 extended)
+model: {l3: {enabled: false}}
+train: {stages: {s3: 30000, s4: 0}}

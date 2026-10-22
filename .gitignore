@@ -1,0 +1,24 @@
+# data, checkpoints, renders, logs (local only)
+data_dev/
+outputs/
+logs/
+met3r_eval/runs/
+*.pt
+*.pth
+*.ckpt
+*.ply
+*.npz
+__pycache__/
+*.pyc
+# SMPL-X body models (license: no redistribution)
+assets/body_models/
+# upstream clones (see README: hustvl/4DGaussians, DNA-Rendering/DNA-Rendering)
+third_party/4DGaussians/
+third_party/DNA-Rendering/
+# gallery media: images/videos of dataset subjects (ZJU-MoCap, 4DAnyone dance) — not redistributed in a public repo
+docs/gallery/pub/
+docs/gallery/pub2/
+docs/gallery/*.bak.json
+results/**/*.png
+results/**/*.jpg
+results/**/*.mp4

@@ -1,0 +1,7 @@
+# D-034 (user 2026-10-13): whole schedule x2 as a NEW run (112000 it), not a continuation: stages, body-adhere,
+# relocation period and SH-degree period all doubled; lr schedules are fractional and stretch automatically.
+train:
+  stages: {s1: 4000, s2: 48000, s3: 24000, s4: 36000}
+  body_adhere_iters: 6000
+  relocate_every: 200
+  sh_every: 12000

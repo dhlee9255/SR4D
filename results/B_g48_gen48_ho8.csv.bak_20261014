@@ -1,0 +1,63 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+ftgspp_black_official,387_gen48_2ring,gen48_ho8,test_interp,19.8928,0.8965,0.2470,21.1326,0.8329,0.2561,0.0305,28,499996,"zju_gen48_ho8 (gen48_ho8), legacy"
+ftgspp_black_official,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,28,499996,"zju_gen48_ho8 (gen48_ho8), legacy"
+ftgspp_black_official,dance5885633_gen48_2ring,gen48_ho8,test_interp,16.5195,0.7940,0.3426,20.7693,0.6953,0.3584,0.0348,24,499996,"dance_gen48_ho8 (gen48_ho8), legacy"
+ftgspp_black_official,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,24,499996,"dance_gen48_ho8 (gen48_ho8), legacy"
+sr4d_final,dance5885633_gen48_2ring,gen48_ho8,test_interp,22.2608,0.8685,0.1411,18.8936,0.7754,0.2205,0.0352,213.2,399999,"dance_gen48_ho8 (gen48_ho8), V0 + pose (a) + L2 + L3"
+sr4d_final,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,213.2,399999,"dance_gen48_ho8 (gen48_ho8), V0 + pose (a) + L2 + L3"
+sr4d_final,387_gen48_2ring,gen48_ho8,test_interp,23.0645,0.9269,0.0717,18.8595,0.8730,0.1142,0.0324,242.1,399999,"zju_gen48_ho8 (gen48_ho8), V0 + pose (a) + L2 + L3"
+sr4d_final,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,242.1,399999,"zju_gen48_ho8 (gen48_ho8), V0 + pose (a) + L2 + L3"
+4dgs,dance5885633_gen48_2ring,gen48_ho8,test_interp,22.7384,0.8712,0.1787,19.4562,0.7797,0.2806,0.0344,23,134760,dance_gen48_ho8 (gen48_ho8)
+4dgs,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,23,134760,dance_gen48_ho8 (gen48_ho8)
+4dgs,387_gen48_2ring,gen48_ho8,test_interp,24.1311,0.9298,0.0962,20.3318,0.8786,0.1542,0.0314,25,118452,zju_gen48_ho8 (gen48_ho8)
+4dgs,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,25,118452,zju_gen48_ho8 (gen48_ho8)
+dualgs,387_gen48_2ring,gen48_ho8,test_interp,25.5871,0.9417,0.0770,21.2883,0.8997,0.1227,0.0318,332,98155,zju_gen48_ho8 (gen48_ho8)
+dualgs,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,332,98155,zju_gen48_ho8 (gen48_ho8)
+dualgs,dance5885633_gen48_2ring,gen48_ho8,test_interp,23.8263,0.8645,0.1507,20.0707,0.7698,0.2371,0.0383,341,116829,dance_gen48_ho8 (gen48_ho8)
+dualgs,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,341,116829,dance_gen48_ho8 (gen48_ho8)
+sr4d_final_sh3,387_gen48_2ring,gen48_ho8,test_interp,23.1409,0.9275,0.0716,18.9023,0.8740,0.1140,0.0323,162.6,399999,"zju_gen48_ho8 (gen48_ho8), final config + sh3"
+sr4d_final_sh3,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,162.6,399999,"zju_gen48_ho8 (gen48_ho8), final config + sh3"
+sr4d_final_rbg,387_gen48_2ring,gen48_ho8,test_interp,23.0182,0.9262,0.0735,18.8612,0.8722,0.1170,0.0326,163.3,399999,"zju_gen48_ho8 (gen48_ho8), final config + rbg"
+sr4d_final_rbg,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,163.3,399999,"zju_gen48_ho8 (gen48_ho8), final config + rbg"
+sr4d_final_cam0,387_gen48_2ring,gen48_ho8,test_interp,24.6215,0.9389,0.0722,20.5186,0.8943,0.1147,0.0303,206.3,399999,"zju_gen48_ho8 (gen48_ho8), final config + cam0"
+sr4d_final_cam0,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,206.3,399999,"zju_gen48_ho8 (gen48_ho8), final config + cam0"
+sr4d_final_rbgcam0,387_gen48_2ring,gen48_ho8,test_interp,23.9652,0.9359,0.0736,20.0798,0.8890,0.1167,0.0307,234.4,399999,"zju_gen48_ho8 (gen48_ho8), final config + rbgcam0"
+sr4d_final_rbgcam0,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,234.4,399999,"zju_gen48_ho8 (gen48_ho8), final config + rbgcam0"
+sr4d_final_headspline,dance5885633_gen48_2ring,gen48_ho8,test_interp,22.2203,0.8699,0.1425,18.8423,0.7773,0.2231,0.0351,178.3,399999,"dance_gen48_ho8 (gen48_ho8), final config + headspline"
+sr4d_final_headspline,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,178.3,399999,"dance_gen48_ho8 (gen48_ho8), final config + headspline"
+sr4d_final_noconf,dance5885633_gen48_2ring,gen48_ho8,test_interp,21.8096,0.8638,0.1222,18.5998,0.7669,0.1916,0.0360,162.8,399999,"dance_gen48_ho8 (gen48_ho8), final config + noconf"
+sr4d_final_noconf,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,162.8,399999,"dance_gen48_ho8 (gen48_ho8), final config + noconf"
+sr4d_final_cam0,dance5885633_gen48_2ring,gen48_ho8,test_interp,21.5980,0.8538,0.1488,17.9608,0.7524,0.2322,0.0362,161.4,399999,"dance_gen48_ho8 (gen48_ho8), final config + cam0"
+sr4d_final_cam0,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,161.4,399999,"dance_gen48_ho8 (gen48_ho8), final config + cam0"
+sr4d_final_x2cam0,dance5885633_gen48_2ring,gen48_ho8,test_interp,20.3264,0.8348,0.1579,16.6120,0.7218,0.2459,0.0382,316.7,399999,"dance_gen48_ho8 (gen48_ho8), final config + x2cam0"
+sr4d_final_x2cam0,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,316.7,399999,"dance_gen48_ho8 (gen48_ho8), final config + x2cam0"
+sr4d_final_cnn,dance5885633_gen48_2ring,gen48_ho8,test_interp,21.5789,0.8544,0.1531,18.0360,0.7531,0.2382,0.0361,165.2,399999,"dance_gen48_ho8 (gen48_ho8), final config + cnn"
+sr4d_final_cnn,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,165.2,399999,"dance_gen48_ho8 (gen48_ho8), final config + cnn"
+sr4d_final,387_gen48_2ring_s123,gen48_ho8,test_interp,23.2072,0.9281,0.0713,18.7839,0.8760,0.1139,0.0319,159.0,399999,"zju_gen48_ho8_s123 (gen48_ho8), V0 + pose (a) + L2 + L3"
+sr4d_final,387_gen48_2ring_s123,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,159.0,399999,"zju_gen48_ho8_s123 (gen48_ho8), V0 + pose (a) + L2 + L3"
+sr4d_final_nol4cnn,dance5885633_gen48_2ring,gen48_ho8,test_interp,22.7234,0.8743,0.1269,19.4359,0.7856,0.1979,0.0345,152.7,399999,"dance_gen48_ho8 (gen48_ho8), final config + nol4cnn"
+sr4d_final_nol4cnn,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,152.7,399999,"dance_gen48_ho8 (gen48_ho8), final config + nol4cnn"
+sr4d_final_nol4,dance5885633_gen48_2ring,gen48_ho8,test_interp,22.8544,0.8759,0.1212,19.4085,0.7884,0.1895,0.0343,160.0,399999,"dance_gen48_ho8 (gen48_ho8), final config + nol4"
+sr4d_final_nol4,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,160.0,399999,"dance_gen48_ho8 (gen48_ho8), final config + nol4"
+sr4d_final_nol4x2,dance5885633_gen48_2ring,gen48_ho8,test_interp,23.1257,0.8748,0.1211,19.5710,0.7866,0.1893,0.0343,303.9,399999,"dance_gen48_ho8 (gen48_ho8), final config + nol4x2"
+sr4d_final_nol4x2,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,303.9,399999,"dance_gen48_ho8 (gen48_ho8), final config + nol4x2"
+ftgspp_white_official,387_gen48_2ring,gen48_ho8,test_interp,24.1760,0.9364,0.0689,19.5181,0.8919,0.1097,0.0310,31,499996,"zju_gen48_ho8, white bg (D-011 wrapper), official init"
+ftgspp_white_official,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,31,499996,"zju_gen48_ho8, white bg (D-011 wrapper), official init"
+ftgspp_white_official,dance5885633_gen48_2ring,gen48_ho8,test_interp,22.4891,0.8737,0.1460,18.4405,0.7872,0.2290,0.0352,31,499996,"dance_gen48_ho8, white bg (D-011 wrapper), official init"
+ftgspp_white_official,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,31,499996,"dance_gen48_ho8, white bg (D-011 wrapper), official init"
+sr4d_s7b,dance5885633_gen48_2ring,gen48_ho8,test_interp,23.1020,0.8739,0.1311,20.0222,0.7843,0.2054,0.0418,,,s7 detail layer on dance_gen48_ho8_nol4
+sr4d_s7b,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,,,s7 detail layer on dance_gen48_ho8_nol4
+sr4d_s7a,dance5885633_gen48_2ring,gen48_ho8,test_interp,23.1309,0.8738,0.1315,20.1458,0.7842,0.2059,0.0420,,,s7 detail layer on dance_gen48_ho8_nol4
+sr4d_s7a,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,,,s7 detail layer on dance_gen48_ho8_nol4
+4dgs_dynerf,dance5885633_gen48_2ring,gen48_ho8,test_interp,20.0182,0.8342,0.2499,17.4093,0.7189,0.3789,0.0389,,80364,"official dynerf preset via mmcv stand-in, dataloader off"
+4dgs_dynerf,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,,80364,"official dynerf preset via mmcv stand-in, dataloader off"
+4dgs_dynerf,387_gen48_2ring,gen48_ho8,test_interp,22.3632,0.8975,0.1480,17.4127,0.8246,0.2251,0.0344,,83947,"official dynerf preset via mmcv stand-in, dataloader off"
+4dgs_dynerf,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,,83947,"official dynerf preset via mmcv stand-in, dataloader off"
+4dgs_dynerf,387_gen48_2ring,gen48_ho8,test_interp,23.0115,0.9035,0.1422,18.4706,0.8364,0.2154,0.0321,,83947,"zju_gen48_ho8, official dynerf preset via mmcv stand-in, dataloader off, export uses deformed opacity"
+4dgs_dynerf,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,,83947,"zju_gen48_ho8, official dynerf preset via mmcv stand-in, dataloader off, export uses deformed opacity"
+4dgs_dynerf,dance5885633_gen48_2ring,gen48_ho8,test_interp,21.7430,0.8632,0.2143,17.9013,0.7600,0.3391,0.0352,,80364,"dance_gen48_ho8, official dynerf preset via mmcv stand-in, dataloader off, export uses deformed opacity"
+4dgs_dynerf,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,,80364,"dance_gen48_ho8, official dynerf preset via mmcv stand-in, dataloader off, export uses deformed opacity"
+4dgs_dynerf,387_gen48_2ring,gen48_ho8,test_interp,23.9235,0.9312,0.0946,20.0447,0.8812,0.1516,0.0318,,,"zju_gen48_ho8, official dynerf preset (14k it, batch 4, width 128, multires [1,2]), dataloader off, NATIVE 4DGS renderer (no alpha -> no oom)"
+4dgs_dynerf,387_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,,,"zju_gen48_ho8, official dynerf preset (14k it, batch 4, width 128, multires [1,2]), dataloader off, NATIVE 4DGS renderer (no alpha -> no oom)"
+4dgs_dynerf,dance5885633_gen48_2ring,gen48_ho8,test_interp,22.8302,0.8715,0.1783,19.6234,0.7803,0.2800,0.0349,,,"dance_gen48_ho8, official dynerf preset (14k it, batch 4, width 128, multires [1,2]), dataloader off, NATIVE 4DGS renderer (no alpha -> no oom)"
+4dgs_dynerf,dance5885633_gen48_2ring,gen48_ho8,test_extrap,nan,nan,nan,nan,nan,nan,nan,,,"dance_gen48_ho8, official dynerf preset (14k it, batch 4, width 128, multires [1,2]), dataloader off, NATIVE 4DGS renderer (no alpha -> no oom)"

@@ -1,0 +1,9 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+sr4d_bones_v2,387_cihp,real12,test_interp,26.2936,0.9637,0.0318,16.7535,0.8324,0.1289,0.0384,172.2,399999,D-023 bone variant v2
+sr4d_bones_v2,387_cihp,real12,test_extrap,24.4376,0.9460,0.0464,15.2730,0.7878,0.1660,0.0383,172.2,399999,D-023 bone variant v2
+sr4d_bones_v1,387_cihp,real12,test_interp,26.2924,0.9636,0.0316,16.7610,0.8317,0.1283,0.0382,175.7,399999,D-023 bone variant v1
+sr4d_bones_v1,387_cihp,real12,test_extrap,24.3531,0.9457,0.0467,15.1861,0.7864,0.1670,0.0382,175.7,399999,D-023 bone variant v1
+sr4d_bones_v0,387_cihp,real12,test_interp,26.2619,0.9634,0.0320,16.6762,0.8308,0.1294,0.0385,183.6,399999,D-023 bone variant v0
+sr4d_bones_v0,387_cihp,real12,test_extrap,24.4387,0.9458,0.0483,15.1900,0.7868,0.1721,0.0382,183.6,399999,D-023 bone variant v0
+sr4d_bones_v3,387_cihp,real12,test_interp,26.2816,0.9635,0.0315,16.7170,0.8316,0.1276,0.0383,212.6,399999,D-023 bone variant v3
+sr4d_bones_v3,387_cihp,real12,test_extrap,24.4560,0.9460,0.0457,15.3287,0.7876,0.1632,0.0381,212.6,399999,D-023 bone variant v3

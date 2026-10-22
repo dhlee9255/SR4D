@@ -1,0 +1,38 @@
+{
+ "outputs/layered/exp002b_dance_ho8_both_drop05/outer_final.pt": {
+  "n": 446246,
+  "floater": 317,
+  "white": 15,
+  "black": 194,
+  "outside_vh_op>=0.1": 318,
+  "ratio>=10_frac": 0.7410218119621277,
+  "ratio_median": 51.255733489990234
+ },
+ "outputs/layered/exp001_dance_ho8_outer/outer_final.pt": {
+  "n": 446246,
+  "floater": 583,
+  "white": 42,
+  "black": 425,
+  "outside_vh_op>=0.1": 596,
+  "ratio>=10_frac": 0.7872048616409302,
+  "ratio_median": 69.75804901123047
+ },
+ "results/DIAG-streak/ftgspp_states/ftgspp_black_official_dance_gen48_ho8.pt": {
+  "n": 499996,
+  "floater": 2249,
+  "white": 10,
+  "black": 1139,
+  "outside_vh_op>=0.1": 2384,
+  "ratio>=10_frac": 0.7755321860313416,
+  "ratio_median": 38.181209564208984
+ },
+ "results/DIAG-streak/ftgspp_states/ftgspp_white_official_dance_gen48_ho8.pt": {
+  "n": 499996,
+  "floater": 1970,
+  "white": 690,
+  "black": 355,
+  "outside_vh_op>=0.1": 2264,
+  "ratio>=10_frac": 0.7638380527496338,
+  "ratio_median": 43.603248596191406
+ }
+}

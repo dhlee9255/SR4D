@@ -1,0 +1,3 @@
+# D-023 free-bone variant v0
+model:
+  free: {n_bones: 0}

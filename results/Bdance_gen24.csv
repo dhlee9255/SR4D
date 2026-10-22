@@ -1,0 +1,15 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+ftgspp_black_official,dance5885633_gen24,gen24,test_interp,18.0071,0.8618,0.2635,23.6927,0.7960,0.2750,0.0310,16,499996,"dance gen24, legacy: black bg, official init"
+ftgspp_black_official,dance5885633_gen24,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,16,499996,"dance gen24, legacy: black bg, official init"
+4dgs,dance5885633_gen24,gen24,test_interp,24.0006,0.8707,0.1993,21.4248,0.8029,0.2807,0.0326,30,133730,dance gen24
+4dgs,dance5885633_gen24,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,30,133730,dance gen24
+sr4d_v2,dance5885633_gen24,gen24,test_interp,22.7465,0.8568,0.1431,20.4765,0.7809,0.2002,0.0340,174.6,399999,"dance gen24 self-eval, bones v2"
+sr4d_v2,dance5885633_gen24,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,174.6,399999,"dance gen24 self-eval, bones v2"
+sr4d_v0,dance5885633_gen24,gen24,test_interp,22.5415,0.8559,0.1422,20.3897,0.7789,0.1992,0.0341,195.1,399999,"dance gen24 self-eval, bones v0"
+sr4d_v0,dance5885633_gen24,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,195.1,399999,"dance gen24 self-eval, bones v0"
+sr4d_free,dance5885633_gen24,gen24,test_interp,22.2700,0.8556,0.1615,20.0049,0.7794,0.2271,0.0368,227.6,399999,"dance gen24 self-eval, bones free"
+sr4d_free,dance5885633_gen24,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,227.6,399999,"dance gen24 self-eval, bones free"
+sr4d_v3,dance5885633_gen24,gen24,test_interp,22.7770,0.8587,0.1435,20.6107,0.7838,0.2009,0.0338,173.4,399999,"dance gen24 self-eval, bones v3"
+sr4d_v3,dance5885633_gen24,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,173.4,399999,"dance gen24 self-eval, bones v3"
+sr4d_v1,dance5885633_gen24,gen24,test_interp,22.7063,0.8569,0.1439,20.4651,0.7809,0.2014,0.0339,172.3,399999,"dance gen24 self-eval, bones v1"
+sr4d_v1,dance5885633_gen24,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,172.3,399999,"dance gen24 self-eval, bones v1"

@@ -1,0 +1,11 @@
+{
+ "results/DIAG-streak/ftgspp_states/ftgspp_transparent_dance_gen48_ho8.pt": {
+  "n": 499996,
+  "floater": 194,
+  "white": 0,
+  "black": 51,
+  "outside_vh_op>=0.1": 196,
+  "ratio>=10_frac": 0.7744001746177673,
+  "ratio_median": 40.99616622924805
+ }
+}

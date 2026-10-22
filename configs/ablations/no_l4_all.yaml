@@ -1,0 +1,2 @@
+# User B4 (2026-10-13): L4 completely off (no camera refinement, no confidence, no colour) -- compare with cam0.
+model: {l4: {enabled: false}}

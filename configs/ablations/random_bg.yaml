@@ -1,0 +1,2 @@
+# D-031 (user step 3, pre-approved): random background colour per training sample (GT composited with the mask on the same colour).
+train: {random_bg: true}

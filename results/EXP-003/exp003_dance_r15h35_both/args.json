@@ -1,0 +1,28 @@
+{
+ "root": "data_dev/fouranyone_gen/dance5885633_gen48_2ring",
+ "setting": "r15h35",
+ "inner": "outputs/sr4d_bones/dance_r15h35/v0_posea/ckpt_final.pt",
+ "out": "outputs/layered/exp003_dance_r15h35_both",
+ "no_render_inner": false,
+ "inner_drop": 0.0,
+ "iters": 30000,
+ "seed": 0,
+ "n_outer": 500000,
+ "lpips_w": 0.05,
+ "lpips_start": 1000,
+ "opac_w": 0.01,
+ "scale_w": 0.01,
+ "gate_w": 0.001,
+ "dur_w": 0.01,
+ "dur_min_frames": 3.0,
+ "vel_w": 0.01,
+ "mask_w": 0.0,
+ "reloc_start": 500,
+ "reloc_stop": 25000,
+ "reloc_every": 100,
+ "dead": 0.005,
+ "save_at": [
+  2000
+ ],
+ "eval_every": 2000
+}

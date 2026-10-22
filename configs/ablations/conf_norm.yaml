@@ -1,0 +1,2 @@
+# D-034 / user B5: L4 confidence normalised to mean 1 per image (redistributes weight instead of a global x20).
+model: {l4: {conf_norm: true}}

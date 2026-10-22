@@ -1,0 +1,874 @@
+{
+ "best": "<b>New-T</b>(New-drop + 투명 배경 학습, fade 없음)가 주 후보입니다(D-044). EXP-009(생성 시드 2개 평균): dance에서는 fg 내부 PSNR 1위(가까운 24.56, 먼 19.01). ZJU에서는 가까운 시점 FTGS++ 투명과 비기고(26.41 vs 26.56), 먼 시점은 FTGS++ 투명이 앞섭니다(21.31 vs 20.53). 먼 시점 LPIPS는 FTGS++ 투명이 일관되게 낫습니다.",
+ "baselines": {
+  "dance": [
+   {
+    "label": "SR4D (L4 끔)",
+    "dir": "sr4d_final/dance_gen48_ho8_nol4",
+    "ours": true
+   },
+   {
+    "label": "DualGS",
+    "dir": "dualgs/dance_gen48_ho8"
+   },
+   {
+    "label": "FTGS++ (공식, 검정 배경)",
+    "dir": "ftgspp_black_official/dance_gen48_ho8"
+   },
+   {
+    "label": "FTGS++ (공식, 흰 배경)",
+    "dir": "ftgspp_white_official/dance_gen48_ho8"
+   },
+   {
+    "label": "4DGS dynerf",
+    "dir": "4dgs_dynerf/dance_gen48_ho8"
+   }
+  ],
+  "ZJU 생성뷰": [
+   {
+    "label": "SR4D",
+    "dir": "sr4d_final/zju_gen48_ho8",
+    "ours": true
+   },
+   {
+    "label": "DualGS",
+    "dir": "dualgs/zju_gen48_ho8"
+   },
+   {
+    "label": "FTGS++ (공식, 검정 배경)",
+    "dir": "ftgspp_black_official/zju_gen48_ho8"
+   },
+   {
+    "label": "FTGS++ (공식, 흰 배경)",
+    "dir": "ftgspp_white_official/zju_gen48_ho8"
+   },
+   {
+    "label": "4DGS dynerf",
+    "dir": "4dgs_dynerf/zju_gen48_ho8"
+   }
+  ]
+ },
+ "experiments": [
+  {
+   "id": "CHECK",
+   "card": "check2k",
+   "date": "10/17",
+   "title": "동작 확인 · 2,000회",
+   "status": "check",
+   "question": "2층 구조 코드가 돌아가고, 바깥층이 실제로 화면을 맡는가?",
+   "conclusion": "코드는 정상. New는 바깥층이 죽고 SR4D 층이 99.99%를 맡음 → New-drop(dropout 0.5) 제안",
+   "setting": "dance gen48_ho8, 안쪽층 = SR4D L4 끔(고정), 바깥층 44.6만 개, 2,000회. 0.03–0.045 s/회, 7.4 GB.",
+   "extra_html": "<div class=\"tbl\"><table><thead><tr><th scope=col>2,000회 시점</th><th scope=col>홀드아웃 PSNR (8뷰×3프레임) ↑</th><th scope=col>살아 있는 바깥층 가우시안</th><th scope=col>안쪽층 알파 비율 (학습 뷰)</th><th scope=col>안쪽층 알파 비율 (홀드아웃 그림)</th></tr></thead><tbody><tr><th scope=row>SR4D</th><td>22.36</td><td>–</td><td>100%</td><td>100%</td></tr><tr><th scope=row>FTGS-only</th><td>20.92</td><td>100%</td><td>0%</td><td>0%</td></tr><tr><th scope=row>New</th><td>22.32</td><td>17%</td><td>99.99%</td><td>100%</td></tr><tr class=ours><th scope=row>New-drop</th><td>22.17</td><td>100%</td><td>91% (1,000회)</td><td>88%</td></tr></tbody></table></div><p class=note>홀드아웃 PSNR은 학습 중 빠른 확인용입니다(전체 이미지, 8뷰 × 프레임 0·30·59). 정식 채점은 실험 카드에 있습니다.</p>",
+   "galleries": [
+    {
+     "grp": "chk",
+     "title": "frame 30 · 홀드아웃 g12·g33 / 학습 g15·g42",
+     "cap": "각 칸: 전체 이미지 + 머리카락·치마 확대, 아래 줄은 |오차|×3. 오른쪽 두 열은 층 기여 지도입니다(주황 = 바깥층, 파랑 = 안쪽층, 흐릴수록 알파가 낮음)."
+    }
+   ],
+   "conclusion_long": "<p>지시대로 학습하면 고정된 안쪽층이 이미 학습 뷰를 거의 설명하므로, 불투명도 희소 L1이 바깥층을 지웁니다. 2,000회에 바깥층의 83%가 죽었고 결과는 SR4D와 같습니다.</p><p>제안: 매 반복 0.5 확률로 안쪽층을 빼고 렌더합니다(SR4D L3 dropout과 같은 방식). 그러면 바깥층이 혼자서도 학습 뷰를 설명해야 하므로 살아남습니다(2,000회에 100% 생존). 렌더 때는 항상 두 층을 함께 씁니다. New(EXP-002)와 New-drop(EXP-002b)을 둘 다 30,000회 돌려 비교합니다.</p>"
+  },
+  {
+   "id": "EXP-001",
+   "card": "exp001",
+   "date": "10/17",
+   "title": "FTGS-only (우리 구현)",
+   "status": "done",
+   "question": "FTGS-only(우리 구현)가 같은 데이터에서 공식 FTGS++와 비슷하게 나오는가?",
+   "setting": "FTGS-only = 바깥층만 학습·렌더. 초기화는 키프레임 SR4D 위치 + visual hull, 손실은 SR4D 사진 손실 + LPIPS VGG 0.05, 색 보정 없음, antialiased 래스터화(D-040 차이 목록).",
+   "rows": [
+    {
+     "label": "FTGS-only",
+     "dir": "layered/exp001_dance_ho8_outer",
+     "file": "metrics_renders_outer.json",
+     "ours": true,
+     "jit": "– (등속)"
+    },
+    {
+     "label": "FTGS++ (공식, 흰 배경)",
+     "dir": "ftgspp_white_official/dance_gen48_ho8"
+    },
+    {
+     "label": "FTGS++ (공식, 검정 배경)",
+     "dir": "ftgspp_black_official/dance_gen48_ho8"
+    },
+    {
+     "label": "SR4D",
+     "dir": "sr4d_final/dance_gen48_ho8_nol4"
+    }
+   ],
+   "conclusion": "FTGS++ (공식, 흰 배경)보다 모든 항목에서 좋음(fg 내부 +2.4 dB, LPIPS −0.048), 검정 배경보다 tOF만 약간 나쁨. SR4D보다 PSNR·LPIPS 좋고 tOF 나쁨",
+   "table_note": "홀드아웃 8뷰 × 60프레임. 바깥층 떨림은 등속 직선 운동이라 정의상 0이어서 비웠습니다. 학습 30,000회 20분(0.039 s/회), 바깥층 44.6만 개(마지막 살아 있는 비율 75%).",
+   "galleries": [
+    {
+     "grp": "held",
+     "title": "새 시점 · 홀드아웃 8뷰 × 프레임 0·30·59",
+     "cap": "각 칸: 전체 이미지 + 머리카락·치마 확대, 아래 줄은 |오차|×3, 왼쪽 위는 그 이미지의 fg PSNR."
+    },
+    {
+     "grp": "train",
+     "title": "학습 뷰 · 15° 링 g03·g15, 35° 링 g30·g42"
+    }
+   ],
+   "conclusion_long": "<p>구현 점검 결과, FTGS-only는 FTGS++와 비슷한 수준을 넘습니다. 공식 흰 배경판보다는 모든 항목에서 좋습니다: fg 내부 PSNR 24.15 vs 21.76, fg LPIPS 0.181 vs 0.229, 마스크 밖 알파 0.004 vs 0.86. 공식 검정 배경판보다는 fg 내부 +0.55 dB, LPIPS 0.181 vs 0.358로 좋고 tOF는 2.51 vs 2.42로 약간 나쁩니다. 차이의 원인으로 보이는 것은 SMPL 기반 초기화(안쪽층 위치 + visual hull), LPIPS VGG 0.05, 색 보정 끔입니다. 초기화에 SR4D 체크포인트 정보가 들어가므로 순수한 FTGS++ 재현은 아닙니다.</p><p>SR4D(L4 끔)와 비교하면 전체 PSNR +0.48, fg 내부 +0.93 dB, fg LPIPS −0.008로 좋고, tOF는 2.51 vs 2.25로 나쁩니다. 판정 기준을 넘는 차이(≥ 0.3 dB)라 채택 판단에는 시드 123 확인이 필요합니다(dance 생성 시드 123 데이터 dance5885633_gen48_2ring_s123 사용 가능).</p>"
+  },
+  {
+   "id": "EXP-002",
+   "card": "exp002",
+   "date": "10/17",
+   "title": "New / New-drop · 가까운 시점",
+   "status": "done",
+   "question": "SR4D 층을 밑칠로 함께 렌더하면(New) FTGS-only보다 홀드아웃 8뷰에서 나아지는가?",
+   "setting": "dance gen48_ho8 시드 42, 안쪽층 = SR4D(L4 끔) 체크포인트(고정). EXP-002 = New(지시대로), EXP-002b = New-drop(+ 학습 때 절반은 SR4D 층을 가림).",
+   "rows": [
+    {
+     "label": "New-drop",
+     "dir": "layered/exp002b_dance_ho8_both_drop05",
+     "file": "metrics_renders_both.json",
+     "ours": true,
+     "jit": "1.62 (안쪽)"
+    },
+    {
+     "label": "New",
+     "dir": "layered/exp002_dance_ho8_both",
+     "file": "metrics_renders_both.json",
+     "ours": true,
+     "jit": "1.62 (안쪽)"
+    },
+    {
+     "label": "FTGS-only",
+     "dir": "layered/exp001_dance_ho8_outer",
+     "file": "metrics_renders_outer.json",
+     "jit": "– (등속)"
+    },
+    {
+     "label": "SR4D",
+     "dir": "sr4d_final/dance_gen48_ho8_nol4"
+    },
+    {
+     "label": "DualGS",
+     "dir": "dualgs/dance_gen48_ho8"
+    },
+    {
+     "label": "FTGS++ (공식, 흰 배경)",
+     "dir": "ftgspp_white_official/dance_gen48_ho8"
+    },
+    {
+     "label": "FTGS++ (공식, 검정 배경)",
+     "dir": "ftgspp_black_official/dance_gen48_ho8"
+    },
+    {
+     "label": "4DGS (dynerf)",
+     "dir": "4dgs_dynerf/dance_gen48_ho8"
+    }
+   ],
+   "conclusion": "New는 바깥층이 죽어 SR4D와 같음. New-drop은 fg 내부 24.25·tOF 2.15로 최고지만 SR4D 층이 여전히 화면의 80%를 맡음(바깥층은 머리카락)",
+   "table_note": "홀드아웃 8뷰 × 60프레임. 떨림은 SR4D 층 가우시안 궤적 값(바깥층은 등속이라 0)입니다. 화면 누적 알파 중 안쪽층 비율 — New: 홀드아웃 99.5%, 궤도 55° 99.3%, 5° 99.7% / New-drop: 홀드아웃 80%, 학습 뷰 79%, 궤도 55° 76%, 5° 83%. fg PSNR(마스크 전체): New-drop 20.88, FTGS-only 20.15, SR4D 19.41, DualGS 20.07, FTGS++ (공식, 검정) 20.77.",
+   "galleries": [
+    {
+     "grp": "held",
+     "title": "새 시점 · 홀드아웃 8뷰 × 프레임 0·30·59",
+     "cap": "오른쪽 두 열은 층 기여 지도(주황 = 바깥층, 파랑 = 안쪽층). FTGS++ (공식, 흰 배경) g12 프레임 57–59는 흰 가우시안이 카메라를 가려 하얗게 나옵니다(기존에 확인한 문제)."
+    },
+    {
+     "grp": "train",
+     "title": "학습 뷰 · 15° 링 g03·g15, 35° 링 g30·g42"
+    }
+   ],
+   "conclusion_long": "<p>New(EXP-002)는 바깥층이 0.3%만 남고, 수치와 화면 모두 SR4D와 같습니다(fg 내부 23.28 vs 23.22, tOF 2.25 vs 2.25).</p><p>New-drop(EXP-002b)은 fg 내부 PSNR 24.25로 FTGS-only(24.15)와 비기고 SR4D보다 1.03 dB 높습니다. tOF는 2.15로 DualGS(1.97) 다음입니다. 대신 fg LPIPS는 0.187로 FTGS-only(0.181)보다 0.006 나쁘고, 전체 PSNR도 0.35 낮습니다.</p><p>층 기여를 보면 바깥층은 주로 머리카락을 맡고, 몸과 옷은 여전히 SR4D 층(80%)이 그립니다.</p>"
+  },
+  {
+   "id": "EXP-003",
+   "card": "exp003",
+   "date": "10/17",
+   "title": "먼 시점 · r15h35 (FTGS-only / New / New-drop)",
+   "status": "done",
+   "question": "15° 링만 보고 학습했을 때 35° 링에서 SR4D 층이 바깥층의 빈 곳을 실제로 채우는가?",
+   "setting": "dance r15h35 시드 42 (15° 링 24뷰 학습, 35° 링 24뷰 채점), 안쪽층 = 기존 r15h35 SR4D 체크포인트(v0_posea).",
+   "rows": [
+    {
+     "label": "New-drop",
+     "ours": true,
+     "jit": "–",
+     "dir": "layered/exp003b_dance_r15h35_both_drop05",
+     "file": "metrics_renders_both.json",
+     "split": "test_extrap"
+    },
+    {
+     "label": "New",
+     "ours": true,
+     "jit": "–",
+     "dir": "layered/exp003_dance_r15h35_both",
+     "file": "metrics_renders_both.json",
+     "split": "test_extrap"
+    },
+    {
+     "label": "FTGS-only",
+     "ours": true,
+     "jit": "– (등속)",
+     "dir": "layered/exp003_dance_r15h35_outer",
+     "file": "metrics_renders_outer.json",
+     "split": "test_extrap"
+    },
+    {
+     "label": "SR4D",
+     "dir": "sr4d_bones/dance_r15h35/v0_posea",
+     "file": "metrics_renders.json",
+     "split": "test_extrap"
+    },
+    {
+     "label": "DualGS",
+     "dir": "dualgs/dance_r15h35",
+     "file": "metrics_renders.json",
+     "split": "test_extrap"
+    },
+    {
+     "label": "FTGS++ (공식, 검정 배경)",
+     "dir": "ftgspp_black_official/dance_r15h35",
+     "file": "metrics_renders.json",
+     "split": "test_extrap"
+    },
+    {
+     "label": "4DGS",
+     "dir": "4dgs/dance_r15h35",
+     "file": "metrics_renders.json",
+     "split": "test_extrap"
+    }
+   ],
+   "conclusion": "SR4D 층은 바깥층이 빈 곳(다리)은 채우지만, 바깥층이 틀리게 있는 곳(정수리)은 가려져 못 고침 → New-drop fg 내부 15.42 < SR4D 18.18. New는 SR4D와 같음",
+   "table_note": "35° 링 24뷰 × 60프레임. 떨림은 생략(SR4D r15h35 값 1.64 mm). 안쪽층 알파 비율: New-drop 35° 68%·학습 뷰 69%, New 96%·97%. co-visible = 학습 카메라 2대 이상이 본 픽셀만(D-027).",
+   "galleries": [
+    {
+     "grp": "held",
+     "title": "먼 시점 · 35° 링 6뷰 × 프레임 0·30·59",
+     "cap": "오른쪽 두 열은 층 기여 지도(주황 = 바깥층, 파랑 = 안쪽층). FTGS-only·DualGS는 정수리·다리가 비고, New-drop은 다리를 SR4D 층이 채우지만 정수리는 바깥층의 틀린 머리카락이 덮습니다."
+    },
+    {
+     "grp": "train",
+     "title": "학습 뷰 · 15° 링 g03·g09·g15·g21 (New-drop / New / FTGS-only)"
+    }
+   ],
+   "conclusion_long": "<p>질문에 대한 답: 일부만 그렇습니다. FTGS-only는 35° 링에서 정수리와 다리가 비어 fg 내부 PSNR이 13.32로 떨어집니다(DualGS 12.99와 비슷). New-drop에서는 비어 있던 다리를 SR4D 층(파랑)이 채웁니다.</p><p>그러나 15° 링에서 제대로 못 본 정수리는 바깥층이 흐리고 납작한 머리카락으로 덮어 버립니다. 바깥층이 앞에 있으므로 SR4D 층의 맞는 머리 모양이 가려집니다. 그래서 New-drop fg 내부는 15.42로 SR4D(18.18)보다 2.76 dB 낮습니다. co-visible 지표에서도 17.89 vs 20.25입니다.</p><p>New는 바깥층이 죽어 SR4D와 같습니다(17.99 vs 18.18). → EXP-004 New-fade로 이어집니다.</p>",
+   "cols": "far"
+  },
+  {
+   "id": "EXP-004",
+   "card": "exp004",
+   "date": "10/17",
+   "title": "New-fade · 못 본 방향에서 바깥층 투명화 (재학습 없음)",
+   "status": "done",
+   "question": "New-drop 모델에 렌더 규칙만 더해, 가까운 시점은 New-drop 수준(24.25)을 지키면서 먼 시점을 SR4D 수준(18.18) 이상으로 올릴 수 있는가?",
+   "setting": "New-drop 모델(EXP-002b, EXP-003b) 그대로. 바깥층 가우시안마다 학습 (카메라, 프레임)을 다시 렌더해 기여량(Σ T·α)과 방향을 기록하고, 기여 ≥ 1픽셀인 학습 카메라를 '보였던 방향'으로 칩니다. 렌더 때 현재 시점 방향과 가장 가까운 보였던 방향 사이 각도 θ로 불투명도에 1 − smoothstep((θ−θ1)/(θ2−θ1))을 곱합니다(D-041). 지시한 세 쌍 + 더 좁은 (5°, 15°)를 추가로 봤습니다.",
+   "extra_html": "",
+   "rows": [],
+   "galleries": [
+    {
+     "grp": "near",
+     "title": "가까운 시점 · gen48_ho8 홀드아웃 4뷰 × 프레임 0·30·59",
+     "cap": "오른쪽 세 열은 층 기여 지도(주황 = 바깥층, 파랑 = 안쪽층)."
+    },
+    {
+     "grp": "far",
+     "title": "먼 시점 · r15h35 35° 링 6뷰 × 프레임 0·30·59",
+     "cap": "New-fade (10°, 25°)는 정수리의 틀린 머리카락이 대부분 사라지지만 일부 남고, (5°, 15°)는 바깥층이 거의 다 꺼져 SR4D와 같은 그림이 됩니다."
+    }
+   ],
+   "conclusion": "결정(D-042): New-fade (10°, 25°)를 주 후보로 고정. 두 목표를 함께 넘는 θ 없음. (10°,25°): 가까운 24.22(목표와 비김) / 먼 17.85(SR4D −0.33). (5°,15°): 먼 18.18(SR4D와 같음, 바깥층 거의 꺼짐) / 가까운 23.42",
+   "conclusion_long": "<p><b>결정 (2026-10-17, D-042)</b>: New-fade를 주 후보로 하고 θ = (10°, 25°)로 고정합니다. 이후 어떤 데이터·시드에서도 다시 고르지 않습니다. 다음 단계는 바깥층 학습을 고치는 EXP-005입니다.</p><p>질문에 대한 답: 아니요. 지시한 세 쌍 중 두 목표를 함께 넘는 것은 없습니다.</p><p><b>(10°, 25°)</b>가 가장 균형이 좋습니다. 가까운 시점 fg 내부 24.22는 New-drop 24.25와 비깁니다(차이 0.03). 먼 시점은 15.42 → 17.85로 2.43 dB 올랐지만 SR4D 18.18보다 0.33 dB 낮습니다. 화면에서는 정수리의 틀린 머리카락이 대부분 사라지고 일부가 남습니다.</p><p>θ를 넓히면 먼 시점이 New-drop 쪽으로 돌아갑니다: (15°, 30°) 16.21, (20°, 40°) 15.54. 가까운 시점은 셋 다 24.22–24.25로 같습니다. 홀드아웃 뷰가 학습 카메라와 가까워 거의 영향을 받지 않기 때문입니다.</p><p>추가로 본 <b>(5°, 15°)</b>는 먼 시점 18.18로 SR4D와 같습니다. 다만 35° 링에서 바깥층이 거의 다 꺼지므로(안쪽층 99.9%) 그림도 SR4D와 같습니다. 대신 가까운 시점이 23.42로 떨어집니다.</p><p>해석: 15° 링에서 학습된 바깥층은 35° 링에서 SR4D보다 나은 부분이 사실상 없습니다. 각도로 바깥층을 줄이는 방식은 먼 시점을 SR4D 수준까지 되돌릴 수는 있어도 그 이상은 못 갑니다. 목표 두 개를 같이 맞추려면 θ를 설정마다 다르게 쓰거나(가까운 데이터 (10°, 25°) 이상, 먼 데이터 (5°, 15°)), 바깥층 자체를 고쳐야 합니다. 예를 들면 바깥층이 학습 뷰에서 덜 보인 부분을 아예 만들지 않게 학습하는 방법이 있습니다. 둘 다 설계 결정이 필요합니다.</p>",
+   "nf_rows": [
+    {
+     "label": "New-drop",
+     "ours": false,
+     "near": {
+      "dir": "layered/exp002b_dance_ho8_both_drop05",
+      "file": "metrics_renders_both.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp003b_dance_r15h35_both_drop05",
+      "file": "metrics_renders_both.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "New-fade (5°, 15°) · 추가",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp002b_dance_ho8_both_drop05",
+      "file": "metrics_renders_fade5_15.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp003b_dance_r15h35_both_drop05",
+      "file": "metrics_renders_fade5_15.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "New-fade (10°, 25°)",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp002b_dance_ho8_both_drop05",
+      "file": "metrics_renders_fade10_25.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp003b_dance_r15h35_both_drop05",
+      "file": "metrics_renders_fade10_25.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "New-fade (15°, 30°)",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp002b_dance_ho8_both_drop05",
+      "file": "metrics_renders_fade15_30.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp003b_dance_r15h35_both_drop05",
+      "file": "metrics_renders_fade15_30.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "New-fade (20°, 40°)",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp002b_dance_ho8_both_drop05",
+      "file": "metrics_renders_fade20_40.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp003b_dance_r15h35_both_drop05",
+      "file": "metrics_renders_fade20_40.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "SR4D",
+     "near": {
+      "dir": "sr4d_final/dance_gen48_ho8_nol4"
+     },
+     "far": {
+      "dir": "sr4d_bones/dance_r15h35/v0_posea",
+      "split": "test_extrap"
+     }
+    }
+   ],
+   "table_note": "목표: 가까운 시점 fg 내부 ≥ 24.25(New-drop), 먼 시점 fg 내부 ≥ 18.18(SR4D). 화면 누적 알파 중 안쪽층 비율(가까운/먼): New-drop 80% / 65%, (5°,15°) 97% / 99.9%, (10°,25°) 82% / 89%, (15°,30°) 80% / 74%, (20°,40°) 80% / 67%. 보였던 방향 기록: 1픽셀 문턱으로 버려지는 기여량은 전체의 0.6%. 어떤 학습 카메라에서도 1픽셀 이상 안 보인 바깥층 가우시안은 dance ho8 50%, r15h35 44%(대부분 불투명도가 낮은 것). 기록·렌더는 재학습 없이 run당 수 분."
+  },
+  {
+   "id": "EXP-005",
+   "card": "exp005",
+   "date": "10/17",
+   "status": "done",
+   "title": "관측 뷰 수 제한 · 덜 보인 곳에 바깥층을 만들지 않게 학습",
+   "question": "바깥층 가우시안 중 학습 뷰 N대 미만에서만 보인 것을 복제하지 않고 주기적으로 가지치기하면, New-fade (10°, 25°)와 함께 썼을 때 가까운 시점 24.2 이상을 지키면서 먼 시점의 SR4D(18.18)와의 차이가 줄어드는가?",
+   "setting": "New-drop 학습(절반 반복에서 SR4D 층 가림, 30k회, 시드 0) 위에 새로 학습. 매 반복 가우시안별 기여량 Σ T·α를 정확히 재서(값 0 채널의 기울기, 다른 기울기 불변) 학습 카메라별로 누적(100회마다 0.97배 감쇠), 추정 기여 ≥ 1픽셀인 카메라를 '보였다'로 셈. 3,000회부터 보인 뷰가 N대 미만이면 relocation 복제 원본에서 빼고, 1,000회마다 dead 표시 → 잘 보이는 가우시안의 복제로 재배치(개수 고정). 25,000회 이후 relocation 종료. N = 3, 6. 렌더는 New-fade (10°, 25°) 고정(D-042).",
+   "nf_rows": [
+    {
+     "label": "New-drop",
+     "ours": false,
+     "near": {
+      "dir": "layered/exp002b_dance_ho8_both_drop05",
+      "file": "metrics_renders_both.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp003b_dance_r15h35_both_drop05",
+      "file": "metrics_renders_both.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "New-fade (10°, 25°)",
+     "ours": false,
+     "near": {
+      "dir": "layered/exp002b_dance_ho8_both_drop05",
+      "file": "metrics_renders_fade10_25.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp003b_dance_r15h35_both_drop05",
+      "file": "metrics_renders_fade10_25.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "N3 (fade 없음)",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp005_dance_ho8_n3",
+      "file": "metrics_renders_both.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp005_dance_r15h35_n3",
+      "file": "metrics_renders_both.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "N6 (fade 없음)",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp005_dance_ho8_n6",
+      "file": "metrics_renders_both.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp005_dance_r15h35_n6",
+      "file": "metrics_renders_both.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "N3 + New-fade (10°, 25°)",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp005_dance_ho8_n3",
+      "file": "metrics_renders_fade10_25.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp005_dance_r15h35_n3",
+      "file": "metrics_renders_fade10_25.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "N6 + New-fade (10°, 25°)",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp005_dance_ho8_n6",
+      "file": "metrics_renders_fade10_25.json",
+      "jit": 1.6219751834869385
+     },
+     "far": {
+      "dir": "layered/exp005_dance_r15h35_n6",
+      "file": "metrics_renders_fade10_25.json",
+      "split": "test_extrap",
+      "jit": 1.6105607748031616
+     }
+    },
+    {
+     "label": "SR4D",
+     "near": {
+      "dir": "sr4d_final/dance_gen48_ho8_nol4",
+      "file": "metrics_renders.json"
+     },
+     "far": {
+      "dir": "sr4d_bones/dance_r15h35/v0_posea",
+      "file": "metrics_renders.json",
+      "split": "test_extrap"
+     }
+    }
+   ],
+   "conclusion": "아니요. N3 + fade: 가까운 24.21 / 먼 17.52, N6 + fade: 24.18 / 17.63. 기존 New-fade(17.85)보다 먼 시점이 0.2–0.3 dB 낮고 SR4D와의 차이는 오히려 커짐. 규칙상 N = 3을 EXP-006·007에 사용. → EXP-007 3시드: 먼 시점 N3 + fade 16.99 ± 0.51 vs New-fade 17.86 ± 0.15 → N3 기각.",
+   "table_note": "dance, 시드 0 한 번씩. 학습 중 '뷰 N대 미만' 비율: 3,000회 첫 가지치기 때 31%(N3)·38%(N6) → 11,000회 이후 1–2%로 유지. 가지치기 수(1,000회당): 첫 회 13.6만–18.2만 → 이후 3천–1.2만. 화면 누적 알파 중 안쪽층 비율(가까운/먼): N3 fade 83% / 88%, N6 fade 82% / 88%, N3 fade 없음 80% / 63%, N6 fade 없음 80% / 62% (참고 New-fade 82% / 89%, New-drop 80% / 65%). 학습 30k회 약 22분.",
+   "galleries": [
+    {
+     "grp": "sum",
+     "title": "같은 프레임(30) · 위 = 가까운 g12, 아래 = 먼 g28",
+     "cap": "층 기여 지도: 주황 = 바깥층, 파랑 = 안쪽층."
+    },
+    {
+     "grp": "crown",
+     "title": "정수리 머리카락 확대 · 프레임 10·30·50",
+     "cap": "숫자는 확대 칸 안의 fg PSNR. 먼 시점에서 N3·N6도 정수리에 흰/틀린 머리카락이 남고, 프레임 10·30에서는 기존 New-fade보다 오히려 많습니다."
+    }
+   ],
+   "conclusion_long": "<p>질문에 대한 답: 아니요. 학습 뷰 수 제한은 먼 시점을 좋게 하지 못했습니다.</p><p><b>가까운 시점</b>: N3 + fade 24.21, N6 + fade 24.18로 New-fade 24.22와 같은 수준입니다(목표 24.2: N3만 겨우 넘음).</p><p><b>먼 시점</b>: N3 + fade 17.52, N6 + fade 17.63으로 기존 New-fade 17.85보다 0.22–0.33 dB 낮습니다. fade 없이 보면 N3 14.87, N6 14.81로 New-drop 15.42보다도 낮습니다. co-visible 내부 PSNR도 19.95 / 19.97로 New-fade 19.99와 같거나 조금 낮습니다. SR4D(18.17)와의 차이는 0.33 → 0.54–0.65 dB로 커졌습니다.</p><p>해석: 15° 링 학습에서 정수리의 틀린 머리카락은 학습 카메라 '여러 대'에 보이는 가우시안입니다. 확인: 먼 시점 6뷰 × 프레임 10·30·50의 정수리 확대 칸에 바깥층만 렌더해서 기여량을 가우시안별 '보인 학습 카메라 수'로 나누면, New-drop은 92%가 12대 이상(24대 중), 7%가 6–11대, 3대 미만은 0.3%입니다. N3 모델도 92% / 8% / 0.1%로 거의 같습니다. 위에서 내려다본 적이 없을 뿐, 15° 링의 카메라 대부분이 옆에서 그 머리카락을 봅니다. 그래서 '몇 대에 보였나'로는 걸러지지 않고, 걸러야 할 것은 '어느 방향에서 보였나'입니다. 이 점은 방향 기반인 New-fade가 이미 다루고 있어 효과가 겹칩니다. 학습 초기의 대량 가지치기(13–18만 개)는 오히려 바깥층 배치를 흔든 것으로 보입니다.</p><p>규칙(D-042, 결과 보기 전 정함)에 따라 가까운 시점 24.2를 넘는 N = 3을 EXP-006·007에 씁니다. EXP-006·007은 New-drop / New-fade도 같은 조건으로 같이 돌리므로, 시드 편차를 보고 N3가 실제로 나쁜지 판정합니다(먼 시점 차이 0.33 dB는 D-026 확인 기준 0.3 dB 이상).</p><p><b>시드 확인 (EXP-007)</b>: 바깥층 시드 0·1·2에서 먼 시점 N3 + fade 16.99 ± 0.51, New-fade 17.86 ± 0.15로 N3가 0.87 dB 낮습니다(편차보다 큼). EXP-005의 결론(효과 없음, 오히려 나쁨)이 확인되어 N3를 기각합니다.</p>"
+  },
+  {
+   "id": "EXP-006",
+   "card": "exp006",
+   "date": "10/17",
+   "status": "done",
+   "title": "ZJU 확인 · New-fade와 N3를 다른 시퀀스에서",
+   "question": "dance에서 고른 설정(New-fade (10°, 25°), EXP-005의 N = 3)이 ZJU-387에서도 SR4D보다 나은가? θ와 N은 다시 고르지 않는다.",
+   "setting": "ZJU-387 4DAnyone 생성 48뷰(시드 42). 가까운 시점 = gen48_ho8(40뷰 학습, 홀드아웃 8뷰), 먼 시점 = r15h35(15° 링 24뷰 학습, 35° 링 24뷰 채점). 안쪽층: 가까운 = sr4d_final/zju_gen48_ho8(ZJU 기본 SR4D, L4 켬 → 렌더는 평균 코드), 먼 = sr4d_bones/zju_r15h35/v0_posea. 바깥층 학습 시드 0, 30k회, New-drop(절반 SR4D 가림)과 N3를 같은 조건으로.",
+   "nf_rows": [
+    {
+     "label": "SR4D",
+     "near": {
+      "dir": "sr4d_final/zju_gen48_ho8",
+      "file": "metrics_renders.json"
+     },
+     "far": {
+      "dir": "sr4d_bones/zju_r15h35/v0_posea",
+      "file": "metrics_renders.json",
+      "split": "test_extrap"
+     }
+    },
+    {
+     "label": "New-drop",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp006_zju_ho8_drop",
+      "file": "metrics_renders_both.json",
+      "jit": 1.8223940134048462
+     },
+     "far": {
+      "dir": "layered/exp006_zju_r15h35_drop",
+      "file": "metrics_renders_both.json",
+      "split": "test_extrap",
+      "jit": 2.258683443069458
+     }
+    },
+    {
+     "label": "New-fade (10°, 25°)",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp006_zju_ho8_drop",
+      "file": "metrics_renders_fade10_25.json",
+      "jit": 1.8223940134048462
+     },
+     "far": {
+      "dir": "layered/exp006_zju_r15h35_drop",
+      "file": "metrics_renders_fade10_25.json",
+      "split": "test_extrap",
+      "jit": 2.258683443069458
+     }
+    },
+    {
+     "label": "N3 (fade 없음)",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp006_zju_ho8_n3",
+      "file": "metrics_renders_both.json",
+      "jit": 1.8223940134048462
+     },
+     "far": {
+      "dir": "layered/exp006_zju_r15h35_n3",
+      "file": "metrics_renders_both.json",
+      "split": "test_extrap",
+      "jit": 2.258683443069458
+     }
+    },
+    {
+     "label": "N3 + New-fade (10°, 25°)",
+     "ours": true,
+     "near": {
+      "dir": "layered/exp006_zju_ho8_n3",
+      "file": "metrics_renders_fade10_25.json",
+      "jit": 1.8223940134048462
+     },
+     "far": {
+      "dir": "layered/exp006_zju_r15h35_n3",
+      "file": "metrics_renders_fade10_25.json",
+      "split": "test_extrap",
+      "jit": 2.258683443069458
+     }
+    },
+    {
+     "label": "DualGS",
+     "near": {
+      "dir": "dualgs/zju_gen48_ho8",
+      "file": "metrics_renders.json"
+     },
+     "far": {
+      "dir": "dualgs/zju_r15h35",
+      "file": "metrics_renders.json",
+      "split": "test_extrap"
+     }
+    },
+    {
+     "label": "4DGS",
+     "near": {
+      "dir": "4dgs_dynerf/zju_gen48_ho8",
+      "file": "metrics_renders.json"
+     },
+     "far": {
+      "dir": "4dgs/zju_r15h35",
+      "file": "metrics_renders.json",
+      "split": "test_extrap"
+     }
+    },
+    {
+     "label": "FTGS++ (공식, 검정 배경)",
+     "near": {
+      "dir": "ftgspp_black_official/zju_gen48_ho8",
+      "file": "metrics_renders.json"
+     },
+     "far": {
+      "dir": "ftgspp_black_official/zju_r15h35",
+      "file": "metrics_renders.json",
+      "split": "test_extrap"
+     }
+    }
+   ],
+   "conclusion": "예(SR4D 대비). New-fade: 가까운 26.11(SR4D +1.75) / 먼 20.70(+0.19, co-vis +0.20). N3는 New-fade와 동률(26.13 / 20.70). 가까운 시점은 DualGS 26.18과 비김, 먼 시점은 FTGS++ 21.00이 fg 내부 최고.",
+   "table_note": "ZJU-387, 시드 0 한 번씩. 떨림은 안쪽층(SR4D 체크포인트) 값. co-visible = 학습 카메라 2대 이상이 본 픽셀만(먼 시점). 화면 누적 알파 중 안쪽층 비율(가까운/먼): New-drop 61% / 58%, New-fade 66% / 89%, N3 61% / 56%, N3 + fade 66% / 87%. 4DGS 공식 렌더러는 알파를 내지 않아 가까운 시점 마스크 밖 알파가 비어 있습니다.",
+   "galleries": [
+    {
+     "grp": "sum",
+     "title": "같은 프레임(30) · 위 = 가까운 g12, 아래 = 먼 g28",
+     "cap": "층 기여 지도: 주황 = 바깥층, 파랑 = 안쪽층."
+    },
+    {
+     "grp": "crown",
+     "title": "정수리 확대 · 프레임 10·30·50",
+     "cap": "숫자는 확대 칸 안의 fg PSNR. ZJU는 짧은 머리라 dance 같은 '틀린 머리카락'이 거의 없습니다."
+    }
+   ],
+   "conclusion_long": "<p>질문에 대한 답: SR4D 대비로는 예. ZJU에서도 2층 구조가 가까운 시점과 먼 시점 모두에서 SR4D보다 높습니다.</p><p><b>가까운 시점</b>: New-fade fg 내부 26.11, N3 + fade 26.13으로 SR4D 24.36보다 1.75 dB 높고, DualGS 26.18과 비깁니다(차이 0.05–0.07). fg LPIPS는 0.103으로 SR4D 0.114, DualGS 0.123보다 낮아 가장 좋습니다. tOF 1.39–1.40은 DualGS 1.31 다음입니다.</p><p><b>먼 시점</b>: New-fade 20.70으로 SR4D 20.51보다 0.19 dB, co-visible 20.67로 SR4D 20.47보다 0.20 dB 높습니다(D-026 기준 0.3 dB 미만 → 시드 확인 없이는 '같거나 조금 나음'). fg LPIPS 0.1385로 기준선 중 가장 낮습니다. fg 내부 PSNR 최고는 FTGS++ 21.00이지만 LPIPS 0.307, 마스크 밖 알파가 높습니다.</p><p><b>fade의 영향</b>: ZJU에서는 fade가 거의 아무것도 바꾸지 않습니다(가까운 +0.05, 먼 +0.05 dB). dance와 달리 15° 링 학습의 바깥층이 35° 링에서도 크게 틀리지 않기 때문입니다(New-drop 먼 시점 20.65 > SR4D 20.51). 먼 시점 안쪽층 비율은 fade로 58% → 89%가 됩니다.</p><p><b>N3 vs New-drop</b>: 모든 지표에서 0.02–0.05 dB, 0.001 이하 차이로 동률입니다.</p>"
+  },
+  {
+   "id": "EXP-007",
+   "card": "exp007",
+   "date": "10/17",
+   "status": "done",
+   "title": "dance 바깥층 학습 시드 2개 추가",
+   "question": "EXP-004·005의 차이(New-fade vs N3 + fade, New-fade vs SR4D)가 바깥층 학습 시드 편차보다 큰가? (D-026)",
+   "setting": "dance gen48_ho8(가까운)과 r15h35(먼). 바깥층 시드 1, 2를 추가 학습(New-drop과 N3 각각). 안쪽층 SR4D는 시드 42 체크포인트 고정. 렌더는 fade 없음과 New-fade (10°, 25°) 둘 다. θ와 N은 다시 고르지 않음.",
+   "extra_html": "<div class=\"tbl\"><table><thead><tr><th scope=col>이름 (바깥층 시드 0·1·2 평균 ± 표준편차)</th><th scope=col>가까운 fg 내부 ↑</th><th scope=col>가까운 fg LPIPS ↓</th><th scope=col>가까운 tOF ↓</th><th scope=col>먼 전체 PSNR ↑</th><th scope=col>먼 fg 내부 ↑</th><th scope=col>먼 fg LPIPS ↓</th><th scope=col>먼 tOF ↓</th><th scope=col>먼 co-vis fg 내부 ↑</th></tr></thead><tbody><tr><th scope=row>SR4D (참고, 시드 42 하나)</th><td>23.22</td><td>0.1895</td><td>2.25</td><td>17.24</td><td>18.17</td><td>0.3420</td><td>2.41</td><td>20.25</td></tr><tr class=ours><th scope=row>New-drop</th><td>24.26 ± 0.03</td><td>0.1872 ± 0.0007</td><td>2.14 ± 0.01</td><td>16.41 ± 0.04</td><td>15.50 ± 0.11</td><td>0.3448 ± 0.0011</td><td>2.45 ± 0.02</td><td>17.96 ± 0.24</td></tr><tr class=ours><th scope=row>New-fade (10°, 25°)</th><td>24.22 ± 0.03</td><td>0.1867 ± 0.0005</td><td>2.14 ± 0.01</td><td>17.24 ± 0.02</td><td>17.86 ± 0.15</td><td>0.3420 ± 0.0003</td><td>2.39 ± 0.01</td><td>20.03 ± 0.16</td></tr><tr class=ours><th scope=row>N3 (fade 없음)</th><td>24.25 ± 0.02</td><td>0.1870 ± 0.0005</td><td>2.14 ± 0.01</td><td>15.95 ± 0.29</td><td>13.88 ± 0.95</td><td>0.3490 ± 0.0020</td><td>2.58 ± 0.02</td><td>16.71 ± 0.86</td></tr><tr class=ours><th scope=row>N3 + New-fade (10°, 25°)</th><td>24.22 ± 0.02</td><td>0.1865 ± 0.0003</td><td>2.15 ± 0.00</td><td>17.05 ± 0.08</td><td>16.99 ± 0.51</td><td>0.3437 ± 0.0010</td><td>2.43 ± 0.01</td><td>19.46 ± 0.45</td></tr></tbody></table></div><p class=\"note\">dance, 안쪽 SR4D 체크포인트는 시드 42 하나로 고정하고 바깥층 학습 시드만 0·1·2로 바꿨습니다. 시드 0은 EXP-002b/003b(New-drop)와 EXP-005(N3) run입니다. 표준편차는 표본 표준편차(n = 3). 시드별 값은 results/EXP-007/metrics.csv. 참고로 SR4D 자체의 생성+학습 시드 편차는 r15h35 fg 내부 0.17 dB(D-026)입니다.</p>",
+   "conclusion": "New-fade 3시드: 가까운 24.22 ± 0.03 / 먼 17.86 ± 0.15. N3 + fade: 24.22 ± 0.02 / 16.99 ± 0.51 → 먼 시점에서 N3가 0.87 dB 낮음(편차보다 큼) → N3 기각. New-fade는 SR4D(18.17)보다 먼 시점 0.31 dB 낮음(시드 편차 0.15보다 큼), 가까운 시점 +1.00 dB.",
+   "galleries": [
+    {
+     "grp": "sum",
+     "title": "같은 프레임(30) · 시드별 · 위 = 먼 g28, 아래 = 가까운 g12",
+     "cap": "층 기여 지도: 주황 = 바깥층, 파랑 = 안쪽층."
+    },
+    {
+     "grp": "crown",
+     "title": "정수리 확대 · 시드별 · 먼 시점 g28",
+     "cap": "숫자는 확대 칸 안의 fg PSNR. 세 시드 모두 New-fade보다 N3 + fade에서 정수리의 흰/틀린 머리카락이 더 많습니다."
+    }
+   ],
+   "conclusion_long": "<p><b>N3 (EXP-005)</b>: 가까운 시점은 New-fade와 같습니다(24.22 ± 0.02 vs 24.22 ± 0.03). 먼 시점은 16.99 ± 0.51로 New-fade 17.86 ± 0.15보다 0.87 dB 낮고, co-visible도 19.46 ± 0.45 vs 20.03 ± 0.16으로 낮습니다. 차이가 두 쪽 시드 편차보다 크고 0.3 dB 기준도 넘으므로 <b>N3는 기각</b>합니다. N3는 시드에 따른 흔들림도 3배 이상 큽니다(fade 없이 13.89 ± 0.95).</p><p><b>New-fade (10°, 25°)</b>: 시드를 바꿔도 안정적입니다(가까운 ± 0.03, 먼 ± 0.15). SR4D 대비 가까운 시점 +1.00 dB, fg LPIPS 0.187 vs 0.190, tOF 2.14 vs 2.25로 낫습니다. 먼 시점은 17.86 vs 18.17로 0.31 dB 낮고, co-visible은 20.03 vs 20.25로 0.22 dB 낮습니다. 먼 시점 차이는 바깥층 시드 편차(0.15)보다 커서 우연으로 보기 어렵습니다. 다만 SR4D 쪽은 시드 하나라 SR4D의 편차(0.17 dB, D-026 참고값)를 합치면 경계에 가깝습니다.</p><p>정리: dance에서 New-fade는 가까운 시점은 확실히 낫고 먼 시점은 SR4D보다 약 0.3 dB 낮습니다. ZJU(EXP-006)에서는 먼 시점도 SR4D보다 0.19 dB 높았습니다(시드 하나).</p>"
+  },
+  {
+   "id": "DIAG-1",
+   "card": "diag",
+   "date": "10/18",
+   "status": "done",
+   "title": "진단 · 정수리 흰 줄은 무엇인가",
+   "question": "(A) New-fade 정수리의 흰 줄은 어느 층에서 나오고 어떤 가우시안인가? EXP-005·007의 '틀린 머리카락'과 같은가? (B) FTGS++ 구현 자체의 문제인가? 가설: 고정 배경색 합성 + 알파 감독 없음 → 배경색 가우시안이 학습 뷰에서는 배경에 숨고 다른 시점에서 사람 앞에 드러남, 모양 규제가 없어 길쭉해짐.",
+   "setting": "dance. (A) New-fade (10°,25°) 먼 시점 모델(EXP-003b)에서 정수리 확대 칸 흰 줄 픽셀이 가장 많은 (35° 링 카메라, 프레임) 2곳 = g26·g47 프레임 30. 가까운 시점 모델도 같은 방식으로 확인. (B) FTGS++ 공식(검정·흰 배경) 모델을 같은 형식으로 덤프해 같은 기준으로 셈 + 코드 확인.",
+   "extra_html": "<h3>A. 흰 줄 가우시안의 속성</h3><div class=\"tbl\"><table><thead><tr><th scope=col>가우시안 묶음 (기여량 가중)</th><th scope=col>색 휘도 중앙값</th><th scope=col>불투명도 (그 시각)</th><th scope=col>축 비율 중앙값</th><th scope=col>축 비율 >10</th><th scope=col>속도 (m/s)</th><th scope=col>지속 (반치폭, 프레임)</th><th scope=col>visual hull 밖</th><th scope=col>학습 카메라 12대 이상에 보임</th><th scope=col>정수리 확대 칸 오차 중 비율</th></tr></thead><tbody><tr><th scope=row>g26 f30 흰 줄 (248개)</th><td>1.00 (밝음 100%)</td><td>0.89</td><td>11880</td><td>95%</td><td>0.13</td><td>9.6</td><td>75%</td><td>98%</td><td>80%</td></tr><tr><th scope=row>g26 f30 참고: 전경의 바깥층 전체</th><td>0.57 (밝음 31%)</td><td>0.47</td><td>260</td><td>91%</td><td>0.09</td><td>10.2</td><td>13%</td><td>91%</td><td>–</td></tr><tr><th scope=row>g47 f30 흰 줄 (298개)</th><td>1.00 (밝음 100%)</td><td>0.87</td><td>62</td><td>84%</td><td>0.20</td><td>9.9</td><td>65%</td><td>98%</td><td>73%</td></tr><tr><th scope=row>g47 f30 참고: 전경의 바깥층 전체</th><td>0.57 (밝음 30%)</td><td>0.41</td><td>152</td><td>90%</td><td>0.10</td><td>9.5</td><td>9%</td><td>89%</td><td>–</td></tr></tbody></table></div><p class=\"note\">흰 줄 가우시안 = 흰 줄 픽셀(정수리 확대 칸 안, GT는 어두운 머리카락인데 New-fade 렌더는 밝음) 기여량의 80%를 차지하는 바깥층 가우시안. 기여량은 안쪽층·fade를 포함한 합동 렌더에서 정확히 계산. visual hull = 그 시각 학습 뷰 24대 마스크(15 px 팽창). 흰 줄 픽셀에서 바깥층 알파 0.88 / 0.74, 안쪽층 0.12 / 0.18.</p><h3>배경색 줄 가우시안 개수</h3><div class=\"tbl\"><table><thead><tr><th scope=col>모델 (학습 배경)</th><th scope=col>시점</th><th scope=col>배경색 줄 가우시안 (전체)</th><th scope=col>흰색</th><th scope=col>검정</th><th scope=col>마스크 밖 알파</th></tr></thead><tbody><tr><th scope=row>New-drop = New-fade 모델 (흰)</th><td>먼 r15h35</td><td>3,168</td><td><b>2,102</b></td><td>962</td><td>0.061 / fade 0.049</td></tr><tr><th scope=row>FTGS-only (흰)</th><td>먼</td><td>2,918</td><td>1,747</td><td>1,066</td><td>–</td></tr><tr><th scope=row>FTGS++ 공식 (검정)</th><td>먼</td><td>1,433</td><td>0</td><td><b>879</b></td><td>0.045</td></tr><tr><th scope=row>N3 시드 0 (EXP-005, 흰)</th><td>먼</td><td>4,692</td><td><b>3,834</b></td><td>740</td><td>0.076</td></tr><tr><th scope=row>N3 시드 1 (EXP-007, 흰)</th><td>먼</td><td>6,306</td><td><b>5,633</b></td><td>566</td><td>0.108</td></tr><tr><th scope=row>New-drop 시드 1 (흰)</th><td>먼</td><td>2,511</td><td>1,832</td><td>613</td><td>0.063</td></tr><tr><th scope=row>New-drop (흰)</th><td>가까운 gen48_ho8</td><td>317</td><td>15</td><td>194</td><td>0.004</td></tr><tr><th scope=row>FTGS-only (흰)</th><td>가까운</td><td>583</td><td>42</td><td>425</td><td>–</td></tr><tr><th scope=row>FTGS++ 공식 (검정)</th><td>가까운</td><td>2,249</td><td>10</td><td><b>1,139</b></td><td>0.051</td></tr><tr><th scope=row>FTGS++ 공식 (흰, SR4D 패치)</th><td>가까운</td><td>1,970</td><td><b>690</b></td><td>355</td><td><b>0.868</b></td></tr></tbody></table></div><p class=\"note\">배경색 줄 가우시안 정의(D-043, EXP-008 전에 고정): 시각 중심에서 학습 뷰 visual hull(15 px 팽창) 밖, 최대 불투명도 ≥ 0.1, 축 비율 ≥ 10. 흰색 = DC 색 휘도 > 0.85, 검정 < 0.15. 흰 배경 학습 모델에도 검정이 수백 개 있는데, 마스크 경계 밖 머리카락 등일 수 있어 따로 확인하지 않았습니다. FTGS++ 흰 배경판은 회색 배경 렌더에서 배경 전체가 흰 가우시안으로 차 있습니다(아래 그림) — 마스크 밖 알파 0.868과 일치.</p><h3>B. FreeTimeGS 논문 · FTGS++ 코드 · 우리 바깥층</h3><div class=\"tbl\"><table><thead><tr><th scope=col>항목</th><th scope=col>FreeTimeGS 논문 (CVPR 2025)</th><th scope=col>FTGS++ 코드 (우리가 돌린 것)</th><th scope=col>우리 바깥층 (New 계열)</th></tr></thead><tbody><tr><th scope=row>코드 정체</th><td>코드 공개 언급 없음 (ZJU, EasyVolcap 기반)</td><td>FreeTimeGS++ 논문(arXiv 2605.03337, SNU)의 <b>공식 구현</b>. FreeTimeGS 휴리스틱을 재현한 기준선 + 추가 요소. FreeTimeGS 자체의 공식 코드는 아님</td><td>FTGS++ 코드에서 모델·relocation을 복사(D-040)</td></tr><tr><th scope=row>학습 데이터·배경</th><td>전체 장면(Neural3DV, ENeRF-Outdoor, SelfCap). 배경 처리 설명 없음, 마스크는 SelfCap 평가에만</td><td>배경 옵션 없음: 렌더 = 검정 위 누적 색. 우리 export는 마스크 후 검정(공식판), 흰 배경판은 SR4D 패치(D-011)</td><td>흰 배경 고정</td></tr><tr><th scope=row>알파·마스크 손실</th><td>없음</td><td>없음</td><td>없음 (mask_w 0)</td></tr><tr><th scope=row>배경색 무작위화</th><td>없음</td><td>없음</td><td>없음</td></tr><tr><th scope=row>크기·모양 규제</th><td>없음 (4D 불투명도 규제만)</td><td>평균 크기 0.01·mean(exp s). 축 비율(모양) 규제 없음</td><td>같음 (축 비율 중앙값 50–90)</td></tr><tr><th scope=row>불투명도 규제</th><td>1e-2 · σ·sg[σ(t)], '학습 초기'에만</td><td>0.01 · 같은 식, 전 구간</td><td>같음</td></tr><tr><th scope=row>opacity reset</th><td>없음</td><td>없음</td><td>없음</td></tr><tr><th scope=row>재배치</th><td>100회마다, 점수 0.5·기울기 + 0.5·불투명도</td><td>100회마다 (500–25k), 불투명도/Σ + 기울기/Σ (같은 비중)</td><td>같음</td></tr><tr><th scope=row>손실</th><td>0.8 L1 + 0.2 SSIM + 0.01 LPIPS</td><td>같음 + marginal gate 0.001, 색 보정</td><td>LPIPS 0.05, gate 0.001</td></tr></tbody></table></div><p class=\"note\">논문 내용은 arXiv 2506.05348 HTML과 2605.03337 초록에서 확인. 코드: ftgspp/train/train.py, ftgspp/train/__init__.py, ftgspp/models/gaussians.py.</p>",
+   "conclusion": "가설이 맞음. 흰 줄은 바깥층에서 나오며, 흰색(휘도 1.00)·불투명(0.87–0.89)·바늘형(축 비율 중앙값 60–12,000)이고 65–75%가 visual hull 밖입니다. 정수리 오차의 73–80%를 차지하고, EXP-005·007의 '틀린 머리카락'과 같은 것입니다. FTGS++도 학습 배경색과 같은 floater를 만듭니다(검정 학습 → 검정 879–1,139개, 흰 학습 → 흰 배경 전체).",
+   "galleries": [
+    {
+     "grp": "far",
+     "title": "A. 먼 시점 정수리 확대 · 층별 렌더",
+     "cap": "바깥층만(검정 배경) 렌더에서 흰 줄이 그대로 보이고, 안쪽층만 렌더에는 거의 없습니다. 오른쪽: FTGS++ 공식 검정 배경판은 같은 자리에 검은 바늘 floater. (r15h35 FTGS++ 흰 배경판은 학습한 적이 없어 회색 칸)"
+    },
+    {
+     "grp": "gray",
+     "title": "B. 회색 배경(0.5)에 렌더 · 35° 링 g27·g45",
+     "cap": "흰 배경 학습 FTGS++는 배경 전체를 흰 가우시안으로 채웠고, 검정 배경 학습 FTGS++는 검은 바늘 floater가 사방에 있습니다. 우리 바깥층은 가까운 시점 학습(40뷰)에서는 깨끗하고, 먼 시점 학습(15° 링)에서는 머리 위에 흰 덩어리가 생깁니다."
+    },
+    {
+     "grp": "near",
+     "title": "A'. 가까운 시점 정수리 확대",
+     "cap": "가까운 시점에는 흰 줄이 없습니다. 자홍 픽셀은 머리카락 윤곽을 덜 덮은 곳(흰 줄 가우시안의 visual hull 밖 비율 3–13%)."
+    }
+   ],
+   "conclusion_long": "<p><b>A. 우리 파이프라인</b>: 흰 줄은 바깥층에서 나옵니다. 흰 줄 픽셀에서 바깥층 알파 0.74–0.88, 안쪽층 0.12–0.18입니다. 흰 줄 가우시안은 248–298개로 적지만:</p><ul><li>색: 휘도 중앙값 1.00, 99–100%가 휘도 0.8 이상 — 학습 배경(흰색)과 같은 색.</li><li>불투명도 0.87–0.89 (전경 바깥층 평균 0.41–0.47). fade 곱 중앙값 0.07–0.09로 대부분 줄어들지만 겹쳐 쌓여 여전히 보입니다.</li><li>모양: 축 비율 중앙값 60–12,000, 84–95%가 10 초과. 다만 바깥층 전체도 축 비율 중앙값이 150–260이라 '모양 규제 없음'은 바깥층 전체의 성질입니다.</li><li>속도 0.13–0.20 m/s(전체 0.09), 지속 시간 반치폭 약 10프레임(전체와 같음).</li><li><b>visual hull 밖 65–75%</b> (전경 바깥층 전체는 9–13%).</li><li>학습 카메라 12대 이상에 보임 98% (중앙값 24대 전부). 학습 뷰에서 배경 위에 흰색으로 보이니 오차 0으로 '보인' 것입니다 → 뷰 수로 거를 수 없었던 이유(EXP-005).</li></ul><p>정수리 확대 칸 오차의 73–80%가 흰 줄 픽셀에서 나옵니다. EXP-005의 N3 모델은 흰 배경색 floater가 3,834–5,633개로 New-drop(1,832–2,102)의 2–3배였고, 먼 시점 점수 순서와 일치합니다. 즉 '정수리의 틀린 머리카락'이 이 흰 줄이고, N3는 덜 보인 가우시안을 지우면서 많이 보인 흰 floater를 복제해 늘렸습니다.</p><p><b>B. FTGS++</b>: 코드에 배경 옵션·알파 손실·배경 무작위화·모양 규제·opacity reset이 모두 없습니다. 이는 전체 장면을 쓰는 FreeTimeGS 설계를 그대로 따른 것이고(논문에도 없음), 손실·relocation은 논문과 같습니다. 마스크로 배경을 고정 색으로 바꾼 우리 사용법에서는 배경색 floater가 비용 없이 생깁니다: 검정 학습 → 검정 floater(흰 0개), 흰 학습 → 흰 floater, 회색 배경 렌더에서는 배경 전체가 흰색(마스크 밖 알파 0.868). 우리 구현 버그가 아니라 FTGS 계열을 고정 배경 전경 데이터에 쓸 때의 공통 문제입니다(D-011에서 검정 floater로 일부 관찰).</p><p><b>결론 한 줄</b>: 가설이 맞습니다 — 배경색 고정 + 알파 감독 없음이 원인이고, 모양 규제 없음이 줄 모양을 만듭니다. 가까운 시점(40뷰)에서는 거의 없고, 위쪽을 못 본 먼 시점 학습에서 머리 위에 드러납니다.</p>"
+  },
+  {
+   "id": "EXP-008",
+   "card": "exp008",
+   "date": "10/18",
+   "status": "done",
+   "title": "투명 배경 학습 (무작위 배경 + 알파 감독), 모양 규제 비교",
+   "question": "흰 줄(배경색 floater)이 고정 배경 + 알파 무감독 때문이라면(DIAG-1), 매 반복 배경색을 무작위로 바꾸고 알파를 마스크로 감독하면 사라지고 먼 시점 점수도 오르는가? 축 비율 상한 + visual hull 밖 가지치기를 더하면 더 나은가?",
+   "setting": "dance gen48_ho8(가까운)과 r15h35(먼). 기반 New-drop(inner_drop 0.5, 시드 0, 30k회) + New-fade (10°, 25°) 렌더. (a) 매 반복 균등 RGB 배경 + 알파 L1 0.05. (b) (a) + 바깥층 축 비율 ≤ 10 투영 + 100회마다 visual hull 밖 바깥층 제거. FTGS++ (투명): 공식 파이프라인에 (a)와 같은 무작위 배경 + 알파 L1 0.05(학습 루프만 third_party로 복사해 수정). 선택 규칙(사전 고정, D-043): New-fade 렌더로 가까운 ≥ 24.2 중 먼 fg 내부가 높은 쪽, 차이 &lt; 0.2 dB이고 LPIPS 차 &lt; 0.005면 (a).",
+   "extra_html": "<div class=\"tbl\"><table><thead><tr><th scope=col>이름</th><th scope=col>가까운 fg 내부 ↑</th><th scope=col>가까운 fg LPIPS ↓</th><th scope=col>가까운 마스크 밖 알파 ↓</th><th scope=col>가까운 배경색 줄 (흰/검정)</th><th scope=col>먼 fg 내부 ↑</th><th scope=col>먼 fg LPIPS ↓</th><th scope=col>먼 co-vis fg 내부 ↑</th><th scope=col>먼 마스크 밖 알파 ↓</th><th scope=col>먼 배경색 줄 (흰/검정)</th></tr></thead><tbody><tr><th scope=row>SR4D</th><td>23.22</td><td>0.1895</td><td>0.0026</td><td>—</td><td>18.17</td><td>0.3420</td><td>20.25</td><td>0.0448</td><td>—</td></tr><tr class=ours><th scope=row>New-fade 기존</th><td>24.22</td><td>0.1869</td><td>0.0035</td><td>15 / 194</td><td>17.85</td><td>0.3420</td><td>19.99</td><td>0.0488</td><td>2102 / 962</td></tr><tr class=ours><th scope=row>(a) 투명 ← 선택</th><td>24.39</td><td>0.1930</td><td>0.0030</td><td>0 / 205</td><td>18.80</td><td>0.3417</td><td>20.97</td><td>0.0454</td><td>1 / 307</td></tr><tr class=ours><th scope=row>(a) 투명, fade 없음</th><td>24.45</td><td>0.1942</td><td>0.0031</td><td>0 / 205</td><td>19.15</td><td>0.3387</td><td>21.28</td><td>0.0470</td><td>1 / 307</td></tr><tr class=ours><th scope=row>(b) 투명+모양</th><td>24.33</td><td>0.1939</td><td>0.0031</td><td>0 / 0</td><td>18.51</td><td>0.3412</td><td>20.70</td><td>0.0450</td><td>0 / 0</td></tr><tr><th scope=row>DualGS</th><td>23.60</td><td>0.2371</td><td>0.0054</td><td>—</td><td>12.99</td><td>0.2962</td><td>16.93</td><td>0.0262</td><td>—</td></tr><tr><th scope=row>FTGS++ 검정</th><td>23.60</td><td>0.3584</td><td>0.0506</td><td>10 / 1139</td><td>15.58</td><td>0.3633</td><td>20.32</td><td>0.0449</td><td>0 / 879</td></tr><tr><th scope=row>FTGS++ 흰</th><td>21.76</td><td>0.2290</td><td>0.8684</td><td>690 / 355</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><th scope=row>FTGS++ 투명</th><td>23.99</td><td>0.2370</td><td>0.0012</td><td>0 / 51</td><td>16.33</td><td>0.2754</td><td>21.23</td><td>0.0047</td><td>0 / 13</td></tr></tbody></table></div><p class=\"note\">dance, 바깥층 시드 0 한 번씩(참고: New-fade 3시드 편차 가까운 ± 0.03, 먼 ± 0.15 dB, EXP-007). 우리 행은 따로 적지 않으면 New-fade (10°, 25°) 렌더입니다. 안쪽층은 기존 New-fade와 같은 체크포인트입니다. 배경색 줄 = 시각 중심이 visual hull(15 px 팽창) 밖, 불투명도 ≥ 0.1, 축 비율 ≥ 10인 가우시안 중 흰색(휘도 &gt; 0.85)/검정(&lt; 0.15) 개수(D-043, 시간 가우시안이 있는 모델만). FTGS++ 흰 배경판은 먼 시점 학습본이 없습니다. 값은 results/EXP-008/metrics.csv.</p>",
+   "conclusion": "(a) 선택. 흰 줄이 사라짐(먼 시점 흰색 2,102 → 1개). 먼 fg 내부 17.85 → 18.80(+0.95, SR4D 18.17보다 +0.63), co-vis 19.99 → 20.97. 가까운 24.22 → 24.39이지만 fg LPIPS 0.1869 → 0.1930로 나빠짐. (b)는 줄 0개지만 먼 18.51로 (a)보다 0.29 dB 낮음. FTGS++도 투명 학습으로 좋아짐(먼 15.58 → 16.33, LPIPS 0.363 → 0.275).",
+   "galleries": [
+    {
+     "grp": "sum",
+     "title": "같은 프레임(30) · 위 = 먼 g28, 아래 = 가까운 g12",
+     "cap": "층 기여 지도: 주황 = 바깥층, 파랑 = 안쪽층. 먼 시점 발 주변 조각은 안쪽층(SR4D)에서 나오며 SR4D 행에도 같이 있습니다."
+    },
+    {
+     "grp": "crown",
+     "title": "정수리 확대 · 먼 g28 / 먼 g26 / 가까운 g12",
+     "cap": "숫자는 확대 칸 안의 fg PSNR. 기존 New-fade의 정수리 흰 줄이 (a)·(b)에서 사라졌습니다. (a) fade 없음과 FTGS++ 투명에는 대신 붉은/보라색 번짐이 일부 보입니다."
+    }
+   ],
+   "conclusion_long": "<p><b>흰 줄은 고쳐졌습니다.</b> 먼 시점 흰색 줄 가우시안이 2,102개에서 (a) 1개, (b) 0개가 됐고, 정수리 확대 칸에서도 흰 줄이 보이지 않습니다. 진단(DIAG-1)의 원인이 맞았다는 직접 확인입니다.</p><p><b>(a) 투명</b>: 먼 시점 fg 내부 17.85 → 18.80(+0.95 dB, 바깥층 시드 편차 0.15의 6배), co-visible 19.99 → 20.97. SR4D(18.17 / 20.25)를 처음으로 먼 시점에서도 넘었습니다(+0.63 / +0.72). 가까운 시점 fg 내부도 24.22 → 24.39로 올랐지만 fg LPIPS는 0.1869 → 0.1930(+0.006)으로 나빠졌습니다(SR4D 0.1895보다도 나쁨).</p><p><b>(b) 투명 + 모양 규제</b>: 배경색 줄은 흰/검정 모두 0이지만 점수는 (a)보다 낮습니다(먼 18.51, 가까운 24.33). 사전 규칙상 먼 시점 차이 0.29 dB ≥ 0.2 → <b>(a) 선택</b>.</p><p><b>관찰 (결정은 사용자)</b>: 투명 학습 뒤에는 fade가 오히려 손해입니다. 먼 시점 fade 없음 19.15 / co-vis 21.28로 fade (10°, 25°) 18.80 / 20.97보다 높고, 가까운 시점도 24.45 vs 24.39입니다. fade는 흰 줄을 가리려고 넣은 장치라 원인이 사라지자 득이 없어진 것으로 보입니다. θ는 다시 고르지 않았고, 이 표도 θ를 바꾸지 않은 결과입니다. 다만 fade 없음 렌더에는 정수리에 붉은 번짐이 일부 보입니다.</p><p><b>FTGS++ (투명)</b>: 공식판(검정) 대비 가까운 23.60 → 23.99, 먼 15.58 → 16.33, 먼 fg LPIPS 0.363 → 0.275, 마스크 밖 알파 0.045 → 0.005, 검정 줄 879 → 13개. 같은 문제가 FTGS++에도 있었고 같은 처방이 통합니다. 먼 시점 fg LPIPS는 FTGS++ 투명(0.275)과 DualGS(0.296)가 우리(0.34)보다 낫습니다. 우리 쪽 먼 시점 LPIPS는 안쪽층 SR4D(0.342)와 같은 수준이라 안쪽층의 흐림이 원인으로 보입니다.</p>"
+  },
+  {
+   "id": "EXP-009",
+   "card": "exp009",
+   "date": "10/18",
+   "status": "done",
+   "title": "New-T 생성 시드 확인 (dance · ZJU × 가까운/먼 시점)",
+   "question": "EXP-008에서 뽑은 New-T(New-drop + 투명 배경 학습, fade 없음)가 새 안쪽층(L4 끔)과 다른 생성 시드에서도 SR4D·기준선을 이기는가? dance 한 시퀀스 결과가 ZJU에서도 유지되는가?",
+   "setting": "dance(4DAnyone 생성 dance5885633)와 ZJU 387(생성) × 가까운 시점(gen48_ho8: 48뷰 중 8뷰 홀드아웃) / 먼 시점(r15h35: 15° 링 24뷰 학습, 35° 링 24뷰 채점) × 생성 시드 42·123 = 8개 조건. 조건마다 안쪽층 SR4D(L4 끔, 학습 시드 42) 새로 학습 → 그 위에 New-T 바깥층(시드 0, 30k회). 기준선 DualGS · FTGS++ (투명 배경) · 4DGS dynerf도 8개 조건 모두. 채점은 생성 뷰만(D-026). 같은 범위면 비김(D-026).",
+   "extra_html": "<p class=\"ft\"><b>dance · 가까운 시점 (gen48_ho8 홀드아웃 8뷰)</b></p><div class=\"tbl\"><table><thead><tr><th scope=col>이름</th><th scope=col>전체 PSNR ↑</th><th scope=col>fg 내부 ↑</th><th scope=col>fg LPIPS ↓</th><th scope=col>마스크 밖 알파 ↓</th><th scope=col>tOF ↓</th><th scope=col>떨림 mm ↓</th></tr></thead><tbody><tr><th scope=row>SR4D</th><td>23.03 ± 0.25</td><td>23.47 ± 0.34</td><td class=best>0.190 ± 0.001</td><td>0.0027 ± 0.0001</td><td>2.24 ± 0.02</td><td class=best>1.69 ± 0.09</td></tr><tr class=ours><th scope=row>New-T</th><td>23.04 ± 0.13</td><td class=best>24.56 ± 0.14</td><td>0.195 ± 0.001</td><td>0.0032 ± 0.0001</td><td>2.11 ± 0.00</td><td class=best>1.69 ± 0.09</td></tr><tr><th scope=row>DualGS</th><td class=best>23.96 ± 0.19</td><td>23.76 ± 0.22</td><td>0.237 ± 0.000</td><td>0.0053 ± 0.0002</td><td class=best>1.99 ± 0.03</td><td>–</td></tr><tr><th scope=row>FTGS++ (투명 배경)</th><td>23.20 ± 0.11</td><td>24.05 ± 0.09</td><td>0.238 ± 0.002</td><td class=best>0.0012 ± 0.0000</td><td>2.23 ± 0.00</td><td>–</td></tr><tr><th scope=row>4DGS dynerf</th><td>22.96 ± 0.18</td><td>23.82 ± 0.08</td><td>0.281 ± 0.001</td><td>–</td><td>2.51 ± 0.10</td><td>–</td></tr><tr><th scope=row>FTGS++ 공식 검정 (참고)</th><td>16.52 (n1)</td><td>23.60 (n1)</td><td>0.358 (n1)</td><td>0.0506 (n1)</td><td>2.42 (n1)</td><td>–</td></tr></tbody></table></div><p class=\"ft\"><b>dance · 먼 시점 (r15h35 35° 링 24뷰)</b></p><div class=\"tbl\"><table><thead><tr><th scope=col>이름</th><th scope=col>전체 PSNR ↑</th><th scope=col>fg 내부 ↑</th><th scope=col>fg LPIPS ↓</th><th scope=col>co-vis fg 내부 ↑</th><th scope=col>마스크 밖 알파 ↓</th><th scope=col>tOF ↓</th><th scope=col>떨림 mm ↓</th></tr></thead><tbody><tr><th scope=row>SR4D</th><td>18.18 ± 0.32</td><td>18.10 ± 0.07</td><td>0.322 ± 0.001</td><td>20.45 ± 0.15</td><td>0.0371 ± 0.0020</td><td>2.31 ± 0.08</td><td class=best>1.90 ± 0.07</td></tr><tr class=ours><th scope=row>New-T</th><td>18.07 ± 0.35</td><td class=best>19.01 ± 0.16</td><td>0.325 ± 0.002</td><td class=best>21.36 ± 0.24</td><td>0.0387 ± 0.0022</td><td class=best>2.22 ± 0.07</td><td class=best>1.90 ± 0.07</td></tr><tr><th scope=row>DualGS</th><td>17.46 ± 0.14</td><td>12.76 ± 0.32</td><td>0.294 ± 0.003</td><td>16.78 ± 0.22</td><td>0.0275 ± 0.0018</td><td>2.50 ± 0.01</td><td>–</td></tr><tr><th scope=row>FTGS++ (투명 배경)</th><td class=best>19.29 ± 0.25</td><td>16.64 ± 0.44</td><td class=best>0.276 ± 0.000</td><td>21.35 ± 0.17</td><td class=best>0.0047 ± 0.0000</td><td>2.48 ± 0.04</td><td>–</td></tr><tr><th scope=row>4DGS dynerf</th><td>17.53 ± 0.26</td><td>15.46 ± 0.13</td><td>0.368 ± 0.002</td><td>19.46 ± 0.07</td><td>–</td><td>2.45 ± 0.16</td><td>–</td></tr><tr><th scope=row>FTGS++ 공식 검정 (참고)</th><td>16.27 ± 1.67</td><td>15.69 ± 0.16</td><td>0.345 ± 0.026</td><td>20.37 ± 0.08</td><td>0.0304 ± 0.0205</td><td>2.94 ± 0.00</td><td>–</td></tr></tbody></table></div><p class=\"ft\"><b>ZJU 387 · 가까운 시점 (gen48_ho8 홀드아웃 8뷰)</b></p><div class=\"tbl\"><table><thead><tr><th scope=col>이름</th><th scope=col>전체 PSNR ↑</th><th scope=col>fg 내부 ↑</th><th scope=col>fg LPIPS ↓</th><th scope=col>마스크 밖 알파 ↓</th><th scope=col>tOF ↓</th><th scope=col>떨림 mm ↓</th></tr></thead><tbody><tr><th scope=row>SR4D</th><td>25.01 ± 0.05</td><td>25.90 ± 0.33</td><td class=best>0.100 ± 0.001</td><td>0.0003 ± 0.0000</td><td>1.44 ± 0.01</td><td class=best>2.07 ± 0.05</td></tr><tr class=ours><th scope=row>New-T</th><td>24.60 ± 0.09</td><td>26.41 ± 0.21</td><td>0.103 ± 0.001</td><td>0.0004 ± 0.0000</td><td>1.37 ± 0.03</td><td class=best>2.07 ± 0.05</td></tr><tr><th scope=row>DualGS</th><td class=best>25.63 ± 0.06</td><td>26.25 ± 0.09</td><td>0.121 ± 0.002</td><td>0.0123 ± 0.0078</td><td class=best>1.29 ± 0.03</td><td>–</td></tr><tr><th scope=row>FTGS++ (투명 배경)</th><td>24.59 ± 0.01</td><td class=best>26.55 ± 0.01</td><td>0.119 ± 0.001</td><td class=best>0.0001 ± 0.0000</td><td>1.38 ± 0.03</td><td>–</td></tr><tr><th scope=row>4DGS dynerf</th><td>23.97 ± 0.07</td><td>25.30 ± 0.07</td><td>0.151 ± 0.001</td><td>–</td><td>1.82 ± 0.02</td><td>–</td></tr><tr><th scope=row>FTGS++ 공식 검정 (참고)</th><td>19.89 (n1)</td><td>25.16 (n1)</td><td>0.256 (n1)</td><td>0.0198 (n1)</td><td>1.59 (n1)</td><td>–</td></tr></tbody></table></div><p class=\"ft\"><b>ZJU 387 · 먼 시점 (r15h35 35° 링 24뷰)</b></p><div class=\"tbl\"><table><thead><tr><th scope=col>이름</th><th scope=col>전체 PSNR ↑</th><th scope=col>fg 내부 ↑</th><th scope=col>fg LPIPS ↓</th><th scope=col>co-vis fg 내부 ↑</th><th scope=col>마스크 밖 알파 ↓</th><th scope=col>tOF ↓</th><th scope=col>떨림 mm ↓</th></tr></thead><tbody><tr><th scope=row>SR4D</th><td class=best>23.59 ± 0.18</td><td>20.44 ± 0.21</td><td class=best>0.139 ± 0.000</td><td>20.51 ± 0.14</td><td>0.0003 ± 0.0000</td><td>1.52 ± 0.04</td><td class=best>2.48 ± 0.03</td></tr><tr class=ours><th scope=row>New-T</th><td>22.86 ± 0.06</td><td>20.53 ± 0.20</td><td>0.143 ± 0.001</td><td>20.56 ± 0.15</td><td>0.0005 ± 0.0001</td><td class=best>1.50 ± 0.03</td><td class=best>2.48 ± 0.03</td></tr><tr><th scope=row>DualGS</th><td>22.52 ± 1.33</td><td>18.31 ± 2.72</td><td>0.177 ± 0.011</td><td>19.18 ± 1.74</td><td>0.0237 ± 0.0109</td><td>1.62 ± 0.00</td><td>–</td></tr><tr><th scope=row>FTGS++ (투명 배경)</th><td>23.35 ± 0.01</td><td class=best>21.31 ± 0.13</td><td>0.139 ± 0.001</td><td class=best>21.26 ± 0.12</td><td class=best>0.0002 ± 0.0000</td><td>1.54 ± 0.04</td><td>–</td></tr><tr><th scope=row>4DGS dynerf</th><td>21.61 ± 0.04</td><td>17.68 ± 0.10</td><td>0.172 ± 0.004</td><td>19.36 ± 0.12</td><td>–</td><td>1.84 ± 0.08</td><td>–</td></tr><tr><th scope=row>FTGS++ 공식 검정 (참고)</th><td>19.50 ± 0.11</td><td>20.91 ± 0.13</td><td>0.306 ± 0.002</td><td>20.89 ± 0.13</td><td>0.0143 ± 0.0004</td><td>1.69 ± 0.05</td><td>–</td></tr></tbody></table></div>\n<p class=\"note\">값 = 생성 시드 42·123 두 개의 평균 ± 표준편차(n = 2). 바깥층 학습 시드는 0 하나입니다. 안쪽층은 새로 학습한 최종 설정 SR4D(L4 끔, 학습 시드 42)이고, SR4D 행이 그 안쪽층만 렌더한 것입니다. New-T = New-drop(inner_drop 0.5) + 무작위 배경 + 알파 L1 0.05, fade 없음. FTGS++ (투명 배경) = 공식 파이프라인 + 같은 무작위 배경·알파 감독. 4DGS dynerf = 공식 dynerf 프리셋(데이터 로더만 끔) + 4DGS 자체 렌더러로 채점(D-038). 4DGS 공식 렌더러는 알파를 내지 않아 마스크 밖 알파가 비어 있습니다. co-vis = 학습 카메라 2대 이상이 본 픽셀만(먼 시점만). 떨림은 SR4D 구조에만 정의되며 New-T 값은 안쪽층 값입니다(바깥층은 등속 직선). FTGS++ 공식 검정은 참고용이라 굵게 표시 비교에서 뺐습니다. 굵게 = 참고 행을 뺀 최고값(편차는 고려하지 않음). 값은 results/EXP-009/metrics.csv, summary.json.</p>",
+   "galleries": [
+    {
+     "grp": "sum",
+     "title": "같은 프레임(30), 생성 시드 42 · 각 그림 위 = 가까운 g12, 아래 = 먼 g28",
+     "cap": "각 칸: 전체 이미지 + 머리카락·치마(또는 상체) 확대, 아래 줄은 |오차|×3, 왼쪽 위 숫자는 그 이미지의 fg PSNR. New-T 아래 줄은 층 기여 지도(주황 = 바깥층, 파랑 = 안쪽층). dance 먼 시점 발 주변 조각은 안쪽층에서 나오며 SR4D에도 같이 있습니다."
+    },
+    {
+     "grp": "crown",
+     "title": "정수리 확대 · frame 10 / 30 / 50 (번짐 관찰용)",
+     "cap": "숫자는 확대 칸 안의 fg PSNR. dance 먼 g28: New-T 정수리에 붉은 번짐(frame 30·50), FTGS++ 투명 머리 왼쪽에 보라색 번짐(세 프레임 모두)이 보입니다. 가까운 시점과 ZJU에서는 두 번짐 모두 눈에 띄지 않습니다. 4DGS dynerf는 정수리에 흰 줄이 남아 있습니다(dynerf는 투명 학습을 하지 않음)."
+    }
+   ],
+   "conclusion": "dance에서는 New-T가 fg 내부 PSNR로 가까운·먼 시점 모두 1위(24.56 ± 0.14, 19.01 ± 0.16). ZJU에서는 가까운 시점이 FTGS++ 투명과 비김(26.41 vs 26.56, 편차 안), 먼 시점은 FTGS++ 투명이 0.78 dB 앞섬(21.31 vs 20.53). ZJU 먼 시점에서 New-T는 SR4D와 비김(+0.09). LPIPS는 New-T가 SR4D보다 조금 나쁨.",
+   "conclusion_long": "<p><b>dance — New-T가 두 시점 모두 fg 내부 1위.</b> 가까운 시점 24.56 ± 0.14로 SR4D 23.47 ± 0.34보다 +1.09, FTGS++ 투명 24.05 ± 0.09보다 +0.50(편차보다 큼). 먼 시점 19.01 ± 0.16으로 SR4D 18.10보다 +0.91, FTGS++ 투명 16.65보다 +2.36. 먼 시점 co-vis는 New-T 21.36 ± 0.24와 FTGS++ 투명 21.35 ± 0.17이 비깁니다. 반면 먼 시점 전체 PSNR(19.29 vs 18.07)과 fg LPIPS(0.276 vs 0.325)는 FTGS++ 투명이 낫습니다. FTGS++는 몸 가장자리·머리 바깥 등 학습 카메라가 거의 못 본 부분을 깔끔하게 비우고, 우리는 안쪽층의 흐린 덩어리와 발 주변 조각을 남기기 때문으로 보입니다.</p><p><b>ZJU — FTGS++ 투명이 같거나 앞섬.</b> 가까운 시점 fg 내부 New-T 26.41 ± 0.21 vs FTGS++ 투명 26.56 ± 0.01: 차이 0.14 dB는 편차 안이라 비김(fg LPIPS는 New-T 0.103이 0.119보다 좋음). 먼 시점은 FTGS++ 투명 21.31 ± 0.13 vs New-T 20.53 ± 0.20, co-vis 21.26 vs 20.56으로 FTGS++가 0.7~0.8 dB 앞섭니다. ZJU 먼 시점에서 New-T는 SR4D(20.44)와 비기고(+0.09), 전체 PSNR은 오히려 낮습니다(22.86 vs 23.59). 바깥층이 dance처럼 크게 흔들리는 머리·치마가 없는 ZJU에서는 더할 것이 적고, 몸 가장자리에 반투명 가우시안을 얹어 손해를 보는 것으로 보입니다(가설, 확인 안 함).</p><p><b>공통.</b> tOF는 New-T가 SR4D보다 4곳 모두 낮습니다(dance 2.11 vs 2.24, 2.22 vs 2.31; ZJU 1.37 vs 1.44, 1.50 vs 1.53). fg LPIPS는 New-T가 SR4D보다 4곳 모두 0.003~0.005 나쁩니다. DualGS는 가까운 시점 전체 PSNR이 가장 높지만(dance 23.96, ZJU 25.63) 먼 시점 fg 내부가 크게 떨어집니다(dance 12.76). 4DGS dynerf는 모든 칸에서 New-T보다 낮습니다.</p><p><b>번짐 관찰 (실험 없음).</b> New-T 붉은 번짐은 dance 먼 시점 정수리에서 보이고, FTGS++ 투명 보라색 번짐은 같은 시점 머리 왼쪽에서 보입니다. 둘 다 무작위 배경 학습에서 학습 카메라가 거의 못 보는 영역의 색이 정해지지 않아 생기는 것으로 보이며, 가까운 시점과 ZJU에서는 눈에 띄지 않습니다.</p><p><b>정리.</b> New-T가 확실히 앞서는 것은 dance(헐렁한 치마·큰 머리)입니다. ZJU처럼 몸에 붙는 옷에서는 FTGS++ 투명과 같거나 뒤집니다. 먼 시점 LPIPS와 전체 PSNR은 FTGS++ 투명이 일관되게 낫습니다. 다음 방향 결정은 사용자 몫으로 둡니다.</p>"
+  }
+ ],
+ "names": [
+  [
+   "SR4D",
+   "기존: SMPL-X 골격에 묶인 아바타 (dance gen48_ho8 = L4 끔, r15h35 = v0_posea 체크포인트)"
+  ],
+  [
+   "FTGS-only",
+   "FTGS식 가우시안만, 뼈대 없이 자유롭게 움직임, 우리 구현"
+  ],
+  [
+   "New",
+   "안쪽 SR4D + 바깥 FTGS식 가우시안을 함께 렌더"
+  ],
+  [
+   "New-drop",
+   "New + 학습 때 절반은 SR4D 층을 가림"
+  ],
+  [
+   "New-fade",
+   "New-drop + 학습 카메라가 못 본 방향에서 바깥층 투명화 (θ1 이하 그대로, θ2 이상 0)"
+  ],
+  [
+   "New-T",
+   "New-drop + 투명 배경 학습(매 반복 무작위 배경 + 알파 감독), fade 없음 — 현재 주 후보 (D-044)"
+  ],
+  [
+   "기준선",
+   "DualGS · FTGS++ (투명 배경 = 대표, 공식 검정 = 참고) · 4DGS (dynerf 설정)"
+  ]
+ ],
+ "top": {
+  "figure": "exp/exp009/sum_dance.jpg",
+  "fig_title": "같은 프레임(30), dance 생성 시드 42 · 위 = 가까운 시점(gen48_ho8 홀드아웃 g12), 아래 = 먼 시점(r15h35 35° 링 g28)",
+  "fig_cap": "각 칸: 전체 이미지 + 머리카락·치마 확대, 아래 줄은 |오차|×3, 왼쪽 위 숫자는 그 이미지의 fg PSNR. New-T 아래 줄은 층 기여 지도(주황 = 바깥층, 파랑 = 안쪽층, 흐릴수록 알파가 낮음). 기준선은 DualGS, FTGS++ (투명 배경), 4DGS dynerf입니다. ZJU 그림은 EXP-009 카드에 있습니다.",
+  "rows": [
+   {
+    "label": "SR4D",
+    "near": {
+     "dir": "sr4d_final/dance_gen48_ho8_nol4",
+     "file": "metrics_renders.json"
+    },
+    "far": {
+     "dir": "sr4d_final/dance_r15h35_nol4",
+     "file": "metrics_renders.json",
+     "split": "test_extrap"
+    }
+   },
+   {
+    "label": "New-drop",
+    "near": {
+     "dir": "layered/exp002b_dance_ho8_both_drop05",
+     "file": "metrics_renders_both.json",
+     "jit": 1.6219751834869385
+    },
+    "far": {
+     "dir": "layered/exp003b_dance_r15h35_both_drop05",
+     "file": "metrics_renders_both.json",
+     "split": "test_extrap",
+     "jit": 1.6105607748031616
+    },
+    "ours": true
+   },
+   {
+    "label": "New-fade (10°, 25°) — 이전 후보",
+    "near": {
+     "dir": "layered/exp002b_dance_ho8_both_drop05",
+     "file": "metrics_renders_fade10_25.json",
+     "jit": 1.6219751834869385
+    },
+    "far": {
+     "dir": "layered/exp003b_dance_r15h35_both_drop05",
+     "file": "metrics_renders_fade10_25.json",
+     "split": "test_extrap",
+     "jit": 1.6105607748031616
+    },
+    "ours": true
+   },
+   {
+    "label": "New-T",
+    "near": {
+     "dir": "layered/exp008a_dance_ho8",
+     "file": "metrics_renders_both.json",
+     "jit": 1.6219751834869385
+    },
+    "far": {
+     "dir": "layered/exp009_dance_r15h35",
+     "file": "metrics_renders_both.json",
+     "split": "test_extrap",
+     "jit": 1.853148341178894
+    },
+    "ours": true
+   },
+   {
+    "label": "DualGS",
+    "near": {
+     "dir": "dualgs/dance_gen48_ho8",
+     "file": "metrics_renders.json"
+    },
+    "far": {
+     "dir": "dualgs/dance_r15h35",
+     "file": "metrics_renders.json",
+     "split": "test_extrap"
+    }
+   },
+   {
+    "label": "4DGS dynerf",
+    "near": {
+     "dir": "4dgs_dynerf/dance_gen48_ho8",
+     "file": "metrics_renders.json"
+    },
+    "far": {
+     "dir": "4dgs_dynerf/dance_r15h35",
+     "file": "metrics_renders.json",
+     "split": "test_extrap"
+    }
+   },
+   {
+    "label": "FTGS++ (투명 배경)",
+    "near": {
+     "dir": "ftgspp_transparent/dance_gen48_ho8",
+     "file": "metrics_renders.json"
+    },
+    "far": {
+     "dir": "ftgspp_transparent/dance_r15h35",
+     "file": "metrics_renders.json",
+     "split": "test_extrap"
+    }
+   },
+   {
+    "label": "FTGS++ 공식 검정 (참고)",
+    "near": {
+     "dir": "ftgspp_black_official/dance_gen48_ho8",
+     "file": "metrics_renders.json"
+    },
+    "far": {
+     "dir": "ftgspp_black_official/dance_r15h35",
+     "file": "metrics_renders.json",
+     "split": "test_extrap"
+    }
+   }
+  ],
+  "note": "dance 한 시퀀스, 시드 42 한 번씩입니다(New-fade 바깥층 시드 3개 평균은 가까운 24.22 ± 0.03, 먼 17.86 ± 0.15 — EXP-007). 가까운 시점 = gen48_ho8 홀드아웃 8뷰 × 60프레임, 먼 시점 = 15° 링 24뷰로 학습하고 35° 링 24뷰 × 60프레임으로 채점. co-visible = 학습 카메라 2대 이상이 본 픽셀만(D-027, 먼 시점에만 계산). 떨림 = 가우시안 궤적 가속도 RMS(mm)로, SR4D 구조에만 정의됩니다. New-drop·New-fade의 떨림은 안쪽층(SR4D와 같은 체크포인트) 값이고, 바깥층은 등속 직선 운동이라 0입니다. 바깥층이 나타났다 사라지는 깜빡임은 떨림이 아니라 tOF에 잡힙니다. 화면 누적 알파 중 안쪽층 비율(가까운/먼): New-drop 80% / 65%, New-fade (10°,25°) 82% / 89%. 4DGS 공식 렌더러는 알파를 내지 않아 가까운 시점 마스크 밖 알파가 비어 있습니다. FTGS-only, New, 다른 θ 값은 EXP-001~004 카드 표에 있습니다. New-fade 투명 / FTGS++ (투명 배경)은 EXP-008(무작위 배경 + 알파 감독) 결과입니다. 위 그림은 EXP-008 이전 것이고, 비교 그림은 EXP-008 카드에 있습니다. [D-044, EXP-009] 주 후보는 New-T(New-drop + 투명 배경 학습, fade 없음), FTGS++ 대표는 투명 배경판. SR4D·New-T 먼 시점은 이제 L4 끔 최종 안쪽층(sr4d_final/dance_r15h35_nol4) 기준이고, 4DGS 먼 시점도 dynerf 설정(D-038 경로)입니다. 이 표는 dance 생성 시드 42 한 번이며, 시드 2개 평균과 ZJU는 EXP-009 카드에 있습니다."
+ }
+}

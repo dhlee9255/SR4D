@@ -1,0 +1,2 @@
+# D-031 (user step 3, pre-approved): L4 per-view camera refinement re-centred to zero mean over training views after every step.
+model: {l4: {cam_mean_zero: true}}

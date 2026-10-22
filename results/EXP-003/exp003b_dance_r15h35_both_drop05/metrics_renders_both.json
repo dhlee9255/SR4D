@@ -1,0 +1,127 @@
+{
+ "test_interp": {
+  "psnr": NaN,
+  "ssim": NaN,
+  "lpips": NaN,
+  "fg_psnr": NaN,
+  "fg_ssim": NaN,
+  "fg_lpips": NaN,
+  "temporal": NaN,
+  "fgi_psnr": NaN,
+  "band_psnr": NaN,
+  "tof": NaN,
+  "oom_alpha": NaN,
+  "per_cam": {}
+ },
+ "test_extrap": {
+  "psnr": 16.369612463977603,
+  "ssim": 0.7897808166841666,
+  "lpips": 0.21713486762924328,
+  "fg_psnr": 14.176156630780962,
+  "fg_ssim": 0.6292986241893636,
+  "fg_lpips": 0.34484408967610863,
+  "temporal": 0.03822092237450856,
+  "fgi_psnr": 15.415065947506163,
+  "band_psnr": 9.441452496912744,
+  "tof": 2.464336913146756,
+  "oom_alpha": 0.06076331502214695,
+  "per_cam": {
+   "g24": {
+    "psnr": 16.70217399597168,
+    "nearest_angle": 24.39
+   },
+   "g25": {
+    "psnr": 16.71469167073568,
+    "nearest_angle": 24.39
+   },
+   "g26": {
+    "psnr": 16.38450994491577,
+    "nearest_angle": 24.39
+   },
+   "g27": {
+    "psnr": 15.942706775665282,
+    "nearest_angle": 24.39
+   },
+   "g28": {
+    "psnr": 15.815016158421834,
+    "nearest_angle": 24.39
+   },
+   "g29": {
+    "psnr": 15.774966859817505,
+    "nearest_angle": 24.39
+   },
+   "g30": {
+    "psnr": 15.521335776646932,
+    "nearest_angle": 24.39
+   },
+   "g31": {
+    "psnr": 15.489659055074055,
+    "nearest_angle": 24.39
+   },
+   "g32": {
+    "psnr": 15.838317918777467,
+    "nearest_angle": 24.39
+   },
+   "g33": {
+    "psnr": 15.76808269818624,
+    "nearest_angle": 24.39
+   },
+   "g34": {
+    "psnr": 16.021274439493816,
+    "nearest_angle": 24.39
+   },
+   "g35": {
+    "psnr": 16.044232606887817,
+    "nearest_angle": 24.39
+   },
+   "g36": {
+    "psnr": 16.038243023554482,
+    "nearest_angle": 24.39
+   },
+   "g37": {
+    "psnr": 16.20660778681437,
+    "nearest_angle": 24.39
+   },
+   "g38": {
+    "psnr": 16.55292927424113,
+    "nearest_angle": 24.39
+   },
+   "g39": {
+    "psnr": 16.914311599731445,
+    "nearest_angle": 24.39
+   },
+   "g40": {
+    "psnr": 17.144870249430337,
+    "nearest_angle": 24.39
+   },
+   "g41": {
+    "psnr": 17.1429620107015,
+    "nearest_angle": 24.39
+   },
+   "g42": {
+    "psnr": 17.003649616241454,
+    "nearest_angle": 24.39
+   },
+   "g43": {
+    "psnr": 17.17769781748454,
+    "nearest_angle": 24.39
+   },
+   "g44": {
+    "psnr": 17.080379645029705,
+    "nearest_angle": 24.39
+   },
+   "g45": {
+    "psnr": 16.718140347798666,
+    "nearest_angle": 24.39
+   },
+   "g46": {
+    "psnr": 16.516559346516928,
+    "nearest_angle": 24.39
+   },
+   "g47": {
+    "psnr": 16.35738051732381,
+    "nearest_angle": 24.39
+   }
+  }
+ }
+}

@@ -1,0 +1,11 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+sr4d_gen_v2,387_gen24_genonly,gen24,test_interp,22.6613,0.9220,0.0745,19.2892,0.8874,0.1009,0.0297,175.2,399999,"ZJU gen24 generated-only self-eval, bones v2"
+sr4d_gen_v2,387_gen24_genonly,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,175.2,399999,"ZJU gen24 generated-only self-eval, bones v2"
+sr4d_gen_v1,387_gen24_genonly,gen24,test_interp,22.6600,0.9224,0.0750,19.2747,0.8878,0.1016,0.0296,178.9,399999,"ZJU gen24 generated-only self-eval, bones v1"
+sr4d_gen_v1,387_gen24_genonly,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,178.9,399999,"ZJU gen24 generated-only self-eval, bones v1"
+sr4d_gen_v0,387_gen24_genonly,gen24,test_interp,22.7067,0.9226,0.0755,19.2668,0.8882,0.1023,0.0297,210.9,399999,"ZJU gen24 generated-only self-eval, bones v0"
+sr4d_gen_v0,387_gen24_genonly,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,210.9,399999,"ZJU gen24 generated-only self-eval, bones v0"
+sr4d_gen_free,387_gen24_genonly,gen24,test_interp,22.4536,0.9188,0.0829,18.9982,0.8827,0.1126,0.0320,226.8,399999,"ZJU gen24 generated-only self-eval, bones free"
+sr4d_gen_free,387_gen24_genonly,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,226.8,399999,"ZJU gen24 generated-only self-eval, bones free"
+sr4d_gen_v3,387_gen24_genonly,gen24,test_interp,22.6559,0.9226,0.0747,19.2744,0.8882,0.1011,0.0295,182.2,399999,"ZJU gen24 generated-only self-eval, bones v3"
+sr4d_gen_v3,387_gen24_genonly,gen24,test_extrap,nan,nan,nan,nan,nan,nan,nan,182.2,399999,"ZJU gen24 generated-only self-eval, bones v3"

@@ -1,0 +1,82 @@
+# Common defaults (CLAUDE.md 7.7). Dataset configs override these.
+seed: 0
+data:
+  dataset: dna_rendering
+  root: null            # <work_data>/<dataset>/<seq>, filled by dataset configs
+  seq: "0012_09"
+  setting: real24
+  frames: [0, 60]
+  background: white
+  preload_device: cuda
+model:
+  canonical_pose: da
+  body_surfels: {n_init: 100000, sh_degree: 1, max_sh_degree: 2, eps_scale: 0.0005, init_scale: 0.004}
+  free: {enabled: true, d_free_m: 0.02, voxel_m: 0.005, carve_voxel_m: 0.01, carve_every: 5, max_init: 150000, n_bones: 25, init_scale: 0.004}
+  cap_total: 400000
+  mip_filter: true
+  mip_kernel: 0.2
+  l2: {enabled: true, pose_dim: 32, encoding: dense, dense_res: [32, 64, 128], dense_feat: 8, hash_levels: 12, hash_log2: 18, hash_base_res: 16, hash_max_res: 1024, hidden: 64}
+  l3: {enabled: true, z_dim: 24, hidden: 128, transient: false, transient_budget: 0.05, dropout: 0.3}
+  l4: {enabled: true, code_dim: 16, camera_refine: false, confidence: false, conf_res: 32, max_cam_rot_deg: 1.0, max_cam_trans_m: 0.02}
+train:
+  stages: {s1: 2000, s2: 24000, s3: 12000, s4: 18000, s5: false, s6: false}
+  body_adhere_iters: 3000
+  batch_size: 2
+  densify: mcmc
+  relocate_every: 100
+  relocate_stop_frac: 0.8      # stop relocation/growth after this fraction of S2..S4
+  grow_rate: 0.05
+  opacity_dead: 0.005
+  mcmc_noise_lr: 5.0e5
+  scaffold_pose_lr: 1.0e-5
+  lrs:
+    s1_pose: 5.0e-4
+    s1_transl: 2.0e-4
+    s1_betas: 1.0e-3
+    means: 1.6e-4
+    bary: 1.0e-2
+    offset: 1.6e-4
+    rot: 1.0e-3
+    scales: 5.0e-3
+    opacities: 5.0e-2
+    sh0: 2.5e-3
+    shN: 1.25e-4
+    bones: 1.0e-3
+    bone_scales: 1.0e-3
+    l2: 1.0e-3
+    l2_hash: 1.0e-2
+    l3: 1.0e-3
+    l3_z: 1.0e-3
+    l4: 1.0e-3
+    l4_cam: 1.0e-4
+    l4_conf: 1.0e-2
+  means_lr_final_mult: 0.01
+  loss:
+    ssim_lambda: 0.2
+    lpips: 0.05
+    lpips_start_frac: 0.5        # fraction of S2 after which LPIPS is on
+    mask: 0.05
+    normal: 0.05
+    aniso: 0.01
+    aniso_ratio: 4.0
+    body_align_pos: 1.0
+    body_align_normal: 0.1
+    opacity_entropy: 0.001
+    bone_reg: 0.1
+    bone_smooth: 0.0             # optional temporal smoothness of free-bone SE(3) (D-015)
+    pose_smooth: 0.0             # optional 2nd-order temporal smoothness of scaffold pose/transl (D-017)
+    l2_mag: 0.01
+    l2_smooth: 0.01
+    l3_mag: 0.01
+    l3_smooth: 0.01
+    l4_reg: 0.001
+    conf: 0.01
+    source_view_mult: 3.0
+    s1_outside: 1.0
+    s1_inside: 0.3
+    s1_pose_prior: 1.0
+eval:
+  splits: [test_interp, test_extrap]
+  every: 2000
+  monitor_frames: 4
+  monitor_cams: 3

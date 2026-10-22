@@ -1,0 +1,2 @@
+# D-034 step 3: L4 per-pixel confidence off (camera refinement kept), everything else as the baseline.
+model: {l4: {confidence: false}}

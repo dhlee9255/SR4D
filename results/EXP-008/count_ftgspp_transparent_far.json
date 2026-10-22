@@ -1,0 +1,11 @@
+{
+ "results/DIAG-streak/ftgspp_states/ftgspp_transparent_dance_r15h35.pt": {
+  "n": 499996,
+  "floater": 87,
+  "white": 0,
+  "black": 13,
+  "outside_vh_op>=0.1": 87,
+  "ratio>=10_frac": 0.8048543930053711,
+  "ratio_median": 49.786598205566406
+ }
+}

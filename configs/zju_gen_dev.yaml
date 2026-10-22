@@ -1,0 +1,10 @@
+# B-stage dev: 4DAnyone gen24 of ZJU-387 (camera B5 source). Generated-only: trained AND evaluated on the generated
+# views (no real cameras anywhere, D-024). L4: camera refinement on, colour affine off (user, D-024).
+data:
+  dataset: fouranyone_gen
+  root: data_dev/zju_mocap_gen/387_gen24_genonly
+  seq: "387"
+  setting: gen24
+  frames: [0, 60]
+model:
+  l4: {enabled: true, color: false, camera_refine: true, confidence: true}

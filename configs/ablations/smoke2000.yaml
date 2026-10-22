@@ -1,0 +1,2 @@
+# 2000-iteration smoke test with L2 active (L2 starts at S3): S1 200, S2 600, S3 1200, no S4.
+train: {stages: {s1: 200, s2: 600, s3: 1200, s4: 0}}

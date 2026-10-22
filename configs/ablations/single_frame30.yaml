@@ -1,0 +1,4 @@
+# D-034 step 2: train on one frame (30) only, L3 off; everything else as the baseline.
+data: {frames: [30, 31]}
+model: {l3: {enabled: false}}
+train: {stages: {s4: 0}}

@@ -1,0 +1,3 @@
+# D-039 (d): colour-only detail layer (dx frozen at 0), LPIPS 0.05 from base, smoothness as in (a).
+train:
+  detail_dx: false

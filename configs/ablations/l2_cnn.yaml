@@ -1,0 +1,2 @@
+# D-035: optional 2D-CNN L2 on canonical front/back orthographic maps (Animatable Gaussians style). Default stays MLP.
+model: {l2: {type: cnn, cnn_res: 256, cnn_ch: [32, 64, 128, 128]}}

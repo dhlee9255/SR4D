@@ -1,0 +1,5 @@
+# D-037: per-frame detail layer, stage s7 after the shared model (frozen); zero + temporal-smoothness regularisers.
+train:
+  stages: {s7: 12000}
+  detail_lr: 1.0e-4
+  loss: {detail_mag: 0.01, detail_smooth: 0.01}

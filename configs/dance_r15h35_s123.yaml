@@ -1,0 +1,10 @@
+# Item 5 (generation seed 123 copy of the item-4 data): dance 2-ring 4DAnyone run (15/35 deg). Train on the 15-deg ring, evaluate on the held-out 35-deg ring (generated GT).
+# views (no real cameras anywhere, D-024). L4: camera refinement on, colour affine off (user, D-024).
+data:
+  dataset: fouranyone_gen
+  root: data_dev/fouranyone_gen/dance5885633_gen48_2ring_s123
+  seq: "dance5885633"
+  setting: r15h35
+  frames: [0, 60]
+model:
+  l4: {enabled: true, color: false, camera_refine: true, confidence: true}

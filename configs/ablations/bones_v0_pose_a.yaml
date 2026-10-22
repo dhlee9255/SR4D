@@ -1,0 +1,4 @@
+# D-025 (a): B-stage pose correction off — input (GVHMR) poses fixed; learn betas + one shared translation offset. Bones V0.
+model:
+  free: {n_bones: 0}
+  scaffold_pose: global

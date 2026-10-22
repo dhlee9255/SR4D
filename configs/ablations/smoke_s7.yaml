@@ -1,0 +1,2 @@
+# 2000-it smoke test of s7 (+consistency): S1 100, S2 500, S3 300, S4 300, S7 900
+train: {stages: {s1: 100, s2: 500, s3: 300, s4: 300, s7: 900}, cons_start: 400, cons_every: 600}

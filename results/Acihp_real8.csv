@@ -1,0 +1,9 @@
+method,seq,setting,split,psnr,ssim,lpips,fg_psnr,fg_ssim,fg_lpips,temporal,train_min,n_gauss,notes
+sr4d,387_cihp,real8,test_interp,25.9693,0.9617,0.0346,16.3537,0.8213,0.1393,0.0450,156.1,399999,
+sr4d,387_cihp,real8,test_extrap,24.4820,0.9472,0.0463,15.4312,0.7926,0.1649,0.0461,156.1,399999,
+ftgspp_black,387_cihp,real8,test_interp,17.5140,0.8662,0.2220,15.9252,0.5588,0.4232,0.0391,14,499996,"mask_cihp, masked black bg, init fix"
+ftgspp_black,387_cihp,real8,test_extrap,17.3015,0.8574,0.2366,15.1422,0.5735,0.4230,0.0388,14,499996,"mask_cihp, masked black bg, init fix"
+4dgs,387_cihp,real8,test_interp,24.5030,0.9574,0.0410,15.2876,0.8022,0.1675,0.0378,31,78796,mask_cihp
+4dgs,387_cihp,real8,test_extrap,22.5855,0.9471,0.0467,13.9587,0.7914,0.1667,0.0348,31,78796,mask_cihp
+dualgs,387_cihp,real8,test_interp,25.0194,0.9520,0.0428,15.6181,0.7769,0.1778,0.0517,469,25222,mask_cihp
+dualgs,387_cihp,real8,test_extrap,22.9761,0.9342,0.0544,14.0714,0.7415,0.1967,0.0578,469,25222,mask_cihp
